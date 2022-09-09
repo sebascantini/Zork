@@ -4,6 +4,12 @@
 #include <vector>
 #include "character.h"
 
-int combat(std::vector<Character*> characters);
+class Combat{
+    public:
+        Combat(std::vector<Character*> enemies);
+        int begin();
+    private:
+        std::vector<Character*> characters;
+};
 
 #endif

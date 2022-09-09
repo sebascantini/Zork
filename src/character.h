@@ -5,24 +5,23 @@ class Character{
     public:
         Character();
         const int actualHealth();
-        virtual int turn() {return 1;}
+        virtual void turn() {}
+
+    protected:
+        void attack(Character* target, int dmg);
+        void getAttacked(int dmg);
+        void updateStats();
+
     private:
-        int max_health;
-        int defence;
-        int attack;
-        int health;
+        int base_hp;
+        int base_def;
+        int base_atk;
+        int final_hp;
+        int final_def;
+        int final_atk;
+        int hp;
+        const int outputDamage(const int dmg);
+        const int inputDamage(const int dmg);
 };
-
-class Enemy: public Character{
-    public:
-        int turn() override;
-};
-
-class Player: public Character{
-    public:
-        int turn() override;
-};
-
-extern Player* player;
 
 #endif

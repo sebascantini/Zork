@@ -19,12 +19,14 @@ const int Character::actualHealth(){
     return hp;
 }
 
-void Character::attack(Character* target, int dmg){
-    target->getAttacked(this->outputDamage(dmg));
+const int Character::attack(Character* target, int dmg){
+    return target->getAttacked(this->outputDamage(dmg));
 }
 
-void Character::getAttacked(const int dmg){
-    hp -= this->inputDamage(dmg);
+const int Character::getAttacked(const int dmg){
+    int final_dmg = inputDamage(dmg);
+    hp -= final_dmg;
+    return final_dmg;
 }
 
 const int Character::outputDamage(const int dmg){

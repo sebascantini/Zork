@@ -1,6 +1,7 @@
 #include "interface.h"
 #include "player.h"
 
-void Player::turn(){
+std::string Player::turn(){
     askForInput();
+    return "you did nothing";
 }

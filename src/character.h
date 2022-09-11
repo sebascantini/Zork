@@ -1,15 +1,17 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+#include<string>
+
 class Character{
     public:
         Character();
         const int actualHealth();
-        virtual void turn() {}
+        virtual std::string turn() {return "";};
 
     protected:
-        void attack(Character* target, int dmg);
-        void getAttacked(int dmg);
+        const int attack(Character* target, int dmg);
+        const int getAttacked(int dmg);
         void updateStats();
 
     private:

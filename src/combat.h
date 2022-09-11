@@ -10,6 +10,7 @@ class Combat{
         Combat(std::vector<Character*> e);
     private:
         std::vector<Character*> characters;
+        void battleMessage(std::string m);
         Screen* screen;
         int begin();
 };

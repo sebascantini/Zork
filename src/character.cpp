@@ -1,4 +1,5 @@
 #include "character.h"
+#include <algorithm>
 
 Character::Character(){
     this->base_hp = 100;
@@ -27,9 +28,9 @@ void Character::getAttacked(const int dmg){
 }
 
 const int Character::outputDamage(const int dmg){
-    return (int)(0.80*this->final_atk*dmg);
+    return std::max(0, (int)(0.80*this->final_atk*dmg));
 }
 
 const int Character::inputDamage(const int dmg){
-    return (dmg-(this->final_def*0.65));
+    return std::max(0, (int)(dmg-(this->final_def*0.65)));
 }

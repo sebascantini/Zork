@@ -3,8 +3,6 @@
 
 #include <string>
 
-void clear();
 std::string askForInput();
-void printStream(std::string s);
 
-#endif;
+#endif

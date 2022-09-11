@@ -2,5 +2,5 @@
 #include "player.h"
 
 void Enemy::turn(){
-    this->attack(player, 1);
+    this->attack(player, 3);
 }

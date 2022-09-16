@@ -6,7 +6,7 @@
 class Enemy: public Character{
     public:
         Enemy();
-        void turn() override;
+        void turn(Environment* environment) override;
 };
 
 #endif

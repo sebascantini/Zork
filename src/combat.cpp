@@ -5,6 +5,7 @@
 
 Combat::Combat(std::vector<Character*> enemies){
     this->scheduler = new CombatScheduler(enemies);
+    this->commands = {};
     this->show();
     this->begin();
 }       
@@ -15,7 +16,7 @@ Combat::~Combat(){
 
 void Combat::begin(){
     while(scheduler->combatContinues()){
-        (scheduler->next())->turn();
+        (scheduler->next())->turn(this);
         this->show();
     }
 }

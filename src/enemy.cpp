@@ -11,6 +11,6 @@ Enemy::Enemy(){
     this->weapon = new Weapon();
 }
 
-void Enemy::turn(){
+void Enemy::turn(Environment* environment){
    this->attack(player);
 }

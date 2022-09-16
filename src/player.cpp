@@ -12,6 +12,6 @@ Player::Player(){
     this->weapon = new Weapon();
 }
 
-void Player::turn(){
-    askForInput();
+void Player::turn(Environment* environment){
+    environment->playerTurn();
 }

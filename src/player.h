@@ -6,7 +6,7 @@
 class Player: public Character{
     public:
         Player();
-        void turn() override;
+        void turn(Environment* environment) override;
     private:
         void setName();
 };

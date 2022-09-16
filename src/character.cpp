@@ -1,5 +1,5 @@
-#include "character.h"
 #include <algorithm>
+#include "character.h"
 
 Character::~Character(){
     delete(this->weapon);

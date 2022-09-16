@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include "combatScheduler.h"
 
+#include <iostream>
+
 CombatScheduler::CombatScheduler(std::vector<Character*> enemies){
     characters = enemies;
     characters.push_back(player);
@@ -17,8 +19,10 @@ Character* CombatScheduler::next(){
     sleep(1);
 
     for(int i = 0; i < scheduling_table.size(); ++i){
-        if(scheduling_table[i][2] >= 100)
+        if(scheduling_table[i][2] >= 100){
+            scheduling_table[i][2] = 0;
             return characters[i];
+        }
 
         int current_time = (100 - scheduling_table[i][2])/scheduling_table[i][1];
 
@@ -30,7 +34,7 @@ Character* CombatScheduler::next(){
 
     for(int i = 0; i < scheduling_table.size(); ++i)
         scheduling_table[i][2] = scheduling_table[i][2] + (scheduling_table[i][1] * fastest_time);
-
+    scheduling_table[next_index][2] = 0;
     return characters[next_index];
 }
 

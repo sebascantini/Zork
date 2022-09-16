@@ -1,8 +1,9 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include "weapon.h"
 #include <string>
+#include "environment.h"
+#include "weapon.h"
 
 class Character{
     public:
@@ -11,7 +12,7 @@ class Character{
         const int getHealth();
         const int getSpeed();
         const int getCurrentHealth();
-        virtual void turn() {};
+        virtual void turn(Environment* environment) {};
 
     protected:
         void attack(Character* target);

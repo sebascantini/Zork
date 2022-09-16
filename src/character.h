@@ -1,28 +1,28 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include<string>
+#include "weapon.h"
 
 class Character{
     public:
         Character();
-        const int actualHealth();
-        virtual std::string turn() {};
+        ~Character();
+        const int getCurrentHealth();
+        const int getSpeed();
+        virtual void turn() {};
 
     protected:
-        const int attack(Character* target, int dmg);
-        const int getAttacked(int dmg);
-        void updateStats();
+        void attack(Character* target);
+        void getAttacked(int dmg);
+        Weapon* weapon;
 
     private:
-        int base_hp;
-        int base_def;
-        int base_atk;
-        int final_hp;
-        int final_def;
-        int final_atk;
-        int hp;
-        const int outputDamage(const int dmg);
+        int health;
+        int defence;
+        int strength;
+        int speed;
+        int current_health;
+        const int outputDamage();
         const int inputDamage(const int dmg);
 };
 

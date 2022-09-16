@@ -5,7 +5,7 @@
 
 class Enemy: public Character{
     public:
-        std::string turn() override;
+        void turn() override;
 };
 
 #endif

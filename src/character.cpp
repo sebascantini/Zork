@@ -2,37 +2,39 @@
 #include <algorithm>
 
 Character::Character(){
-    this->base_hp = 100;
-    this->base_def = 50;
-    this->base_atk = 25;
-    this->hp = base_hp;
-    this->updateStats();
+    this->health = 100;
+    this->defence = 20;
+    this->strength = 25;
+    this->speed = 50;
+    this->current_health = this->health;
+    this->weapon = new Weapon();
 }
 
-void Character::updateStats(){
-    final_hp = base_hp;
-    final_def = base_def;
-    final_atk = base_atk;
+Character::~Character(){
+    delete(this->weapon);
 }
 
-const int Character::actualHealth(){
-    return hp;
+const int Character::getCurrentHealth(){
+    return this->current_health;
 }
 
-const int Character::attack(Character* target, int dmg){
-    return target->getAttacked(this->outputDamage(dmg));
+const int Character::getSpeed(){
+    return this->speed;
 }
 
-const int Character::getAttacked(const int dmg){
-    int final_dmg = inputDamage(dmg);
-    hp -= final_dmg;
-    return final_dmg;
+void Character::attack(Character* target){
+    target->getAttacked(this->outputDamage());
 }
 
-const int Character::outputDamage(const int dmg){
-    return std::max(0, (int)(0.80*this->final_atk*dmg));
+void Character::getAttacked(const int damage){
+    int final_damage = inputDamage(damage);
+    this->current_health -= final_damage;
 }
 
-const int Character::inputDamage(const int dmg){
-    return std::max(0, (int)(dmg-(this->final_def*0.65)));
+const int Character::outputDamage(){
+    return std::max(0, this->weapon->damage() + this->strength);
+}
+
+const int Character::inputDamage(const int damage){
+    return std::max(0, (int)(damage-this->defence));
 }

@@ -5,7 +5,7 @@
 
 class Player: public Character{
     public:
-        std::string turn() override;
+        void turn() override;
 };
 
 extern Player* player;

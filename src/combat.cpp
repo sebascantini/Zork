@@ -1,11 +1,20 @@
 #include "combat.h"
-#include "player.h"
-#include <algorithm>
-#include <random>
-#include <chrono>
-#include <thread>
 
-Combat::Combat(std::vector<Character*> e){
-    screen = new CombatScreen();
-    screen->show();
-}                  
+Combat::Combat(std::vector<Character*> enemies){
+    this->scheduler = new CombatScheduler(enemies);
+    this->screen = new CombatScreen();
+    this->screen->show();
+    this->begin();
+}       
+
+Combat::~Combat(){
+    delete(this->scheduler);
+    delete(this->screen);
+}
+
+void Combat::begin(){
+    while(scheduler->combatContinues()){
+        (scheduler->next())->turn();
+        this->screen->show();
+    }
+}

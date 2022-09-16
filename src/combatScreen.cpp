@@ -9,7 +9,7 @@ void CombatScreen::show(){
         "   Enemy Data",
         "",
         "",
-        "HP: " + std::to_string(player->actualHealth()),
+        "HP: " + std::to_string(player->getCurrentHealth()),
         "",
         "",
         ""

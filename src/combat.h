@@ -1,15 +1,17 @@
 #ifndef COMBAT_H
 #define COMBAT_H
 
-#include <vector>
 #include "combatScreen.h"
-#include "character.h"
+#include "combatScheduler.h"
 
 class Combat{
     public:
-        Combat(std::vector<Character*> e);
+        Combat(std::vector<Character*> enemies);
+        ~Combat();
     private:
         CombatScreen* screen;
+        CombatScheduler* scheduler;
+        void begin();
 };
 
 #endif

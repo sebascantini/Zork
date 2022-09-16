@@ -38,7 +38,7 @@ void Combat::show(){
         " =============================================================================================== ",
         "",
         "",
-        "    " + player.name(),
+        "    " + player->getName(),
         "    HP: " + std::to_string(player->getCurrentHealth()) + "/" + std::to_string(player->getHealth()),
         "    SP: ",
         "    MP: ",

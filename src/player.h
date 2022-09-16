@@ -5,6 +5,7 @@
 
 class Player: public Character{
     public:
+        Player();
         void turn() override;
     private:
         void setName();

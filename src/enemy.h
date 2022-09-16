@@ -5,6 +5,7 @@
 
 class Enemy: public Character{
     public:
+        Enemy();
         void turn() override;
 };
 

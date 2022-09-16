@@ -1,17 +1,12 @@
 #include "character.h"
 #include <algorithm>
 
-Character::Character(){
-    this->health = 100;
-    this->defence = 20;
-    this->strength = 25;
-    this->speed = 50;
-    this->current_health = this->health;
-    this->weapon = new Weapon();
-}
-
 Character::~Character(){
     delete(this->weapon);
+}
+
+const std::string Character::getName(){
+    return this->name;
 }
 
 const int Character::getHealth(){

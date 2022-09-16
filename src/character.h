@@ -7,7 +7,7 @@ class Character{
     public:
         Character();
         const int actualHealth();
-        virtual std::string turn() {return "";};
+        virtual std::string turn() {};
 
     protected:
         const int attack(Character* target, int dmg);

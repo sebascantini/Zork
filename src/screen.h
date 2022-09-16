@@ -5,14 +5,10 @@
 #include <string>
 
 class Screen{
-    public:
-        Screen(std::string t, std::vector<std::string> c);
-        virtual void printScreen();
+    protected:
         std::vector<std::string> lines;
+        void print();
     private:
-        std::string title;
-        std::vector<std::string> commands;
-        void clear();
         void printLine(std::string s);
 };
 

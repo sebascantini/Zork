@@ -6,6 +6,8 @@
 class Player: public Character{
     public:
         void turn() override;
+    private:
+        void setName();
 };
 
 extern Player* player;

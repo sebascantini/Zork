@@ -2,13 +2,15 @@
 #define CHARACTER_H
 
 #include "weapon.h"
+#include <string>
 
 class Character{
     public:
         Character();
         ~Character();
-        const int getCurrentHealth();
+        const int getHealth();
         const int getSpeed();
+        const int getCurrentHealth();
         virtual void turn() {};
 
     protected:
@@ -17,6 +19,7 @@ class Character{
         Weapon* weapon;
 
     private:
+        std::string name;
         int health;
         int defence;
         int strength;

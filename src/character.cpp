@@ -14,12 +14,16 @@ Character::~Character(){
     delete(this->weapon);
 }
 
-const int Character::getCurrentHealth(){
-    return this->current_health;
+const int Character::getHealth(){
+    return this->health;
 }
 
 const int Character::getSpeed(){
     return this->speed;
+}
+
+const int Character::getCurrentHealth(){
+    return this->current_health;
 }
 
 void Character::attack(Character* target){

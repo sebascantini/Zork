@@ -1,6 +1,7 @@
+#include <string>
 #include "interface.h"
-#include "combat.h"
 #include "player.h"
+#include "combat.h"
 
 Combat::Combat(std::vector<Character*> enemies){
     this->scheduler = new CombatScheduler(enemies);
@@ -22,14 +23,34 @@ void Combat::begin(){
 void Combat::show(){
     print({
         "",
-        "COMBAT",
-        "",
-        "   Enemy Data",
+        " ========= Combat ============================================================================== ",
         "",
         "",
-        "HP: " + std::to_string(player->getCurrentHealth()),
         "",
         "",
-        ""
+        "",
+        "                                          1. Enemy",
+        "",
+        "",
+        "",
+        "",
+        "",
+        " =============================================================================================== ",
+        "",
+        "",
+        "    " + player.name(),
+        "    HP: " + std::to_string(player->getCurrentHealth()) + "/" + std::to_string(player->getHealth()),
+        "    SP: ",
+        "    MP: ",
+        "",
+        "",
+        "    1. Attack",
+        "    2. Use Item",
+        "    3. Run",
+        "    4. Options",
+        "",
+        "",
+        " =============================================================================================== ",
+        "",
     });
 }

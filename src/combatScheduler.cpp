@@ -1,4 +1,5 @@
 #include "player.h"
+#include <unistd.h>
 #include "combatScheduler.h"
 
 CombatScheduler::CombatScheduler(std::vector<Character*> enemies){
@@ -12,6 +13,8 @@ CombatScheduler::CombatScheduler(std::vector<Character*> enemies){
 Character* CombatScheduler::next(){
     int next_index = 0;
     float fastest_time = __INT_MAX__;
+
+    sleep(1);
 
     for(int i = 0; i < scheduling_table.size(); ++i){
         if(scheduling_table[i][2] >= 100)

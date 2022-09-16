@@ -3,10 +3,10 @@ CFLAGS=-I.
 
 DIR=src
 
-_DEPS = interface.h screen.h enemy.h player.h character.h combat.h combatScreen.h weapon.h combatScheduler.h
+_DEPS = interface.h enemy.h player.h character.h combat.h weapon.h combatScheduler.h
 DEPS = $(patsubst %,$(DIR)/%,$(_DEPS))
 
-_OBJ = main.o interface.o screen.o enemy.o player.o character.o combat.o combatScreen.o weapon.o combatScheduler.o
+_OBJ = main.o interface.o enemy.o player.o character.o combat.o weapon.o combatScheduler.o
 OBJ = $(patsubst %,$(DIR)/%,$(_OBJ))
 
 %.o: %.c $(DEPS)

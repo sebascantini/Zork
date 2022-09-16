@@ -2,7 +2,10 @@
 #define INTERFACE_H
 
 #include <string>
+#include <vector>
 
 std::string askForInput();
+
+void print(std::vector<std::string> screen);
 
 #endif

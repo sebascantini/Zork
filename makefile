@@ -1,22 +1,23 @@
-CC=g++
-CFLAGS=-I.
+CC := g++
+CFLAGS := -I.
+NAME := run
 
-DIR=src
+SRC := src
 
-_DEPS = interface.h enemy.h player.h character.h combat.h weapon.h combatScheduler.h environment.h commands.h
-DEPS = $(patsubst %,$(DIR)/%,$(_DEPS))
+# $(wildcard *.cpp /xxx/xxx/*.cpp): get all .cpp files from the current directory and dir "/xxx/xxx/"
+SOURCES := $(wildcard $(SRC)/*.cpp)
+# $(patsubst %.cpp,%.o,$(SRCS)): substitute all ".cpp" file name strings to ".o" file name strings
+OBJECTS := $(patsubst %.cpp,%.o,$(SOURCES))
 
-_OBJ = main.o interface.o enemy.o player.o character.o combat.o weapon.o combatScheduler.o environment.o commands.o
-OBJ = $(patsubst %,$(DIR)/%,$(_OBJ))
 
-%.o: %.c $(DEPS)
+%.o: %.cpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-run: $(OBJ)
+$(NAME): $(OBJECTS)
 	$(CC) -o $@ $^ $(CFLAGS)
-	rm -f $(DIR)/*.o *~
+	rm -f $(SRC)/*.o *~
 
 .PHONY: clean
 
 clean:
-	rm -f $(DIR)/*.o *~ core $(INCDIR)/*~
+	rm -f $(NAME) $(SRC)/*.o *~ core $(INCDIR)/*~

@@ -1,12 +1,14 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H
 
-void attack();
+#include "environment.h"
 
-void useItem();
+void attack(Environment *environment);
 
-void run();
+void useItem(Environment *environment);
 
-void options();
+void run(Environment *environment);
+
+void options(Environment *environment);
 
 #endif

@@ -6,7 +6,7 @@ void Environment::playerTurn(){
     while(this->isInputInvalid(input)){
         input = stoi(askForInput());
     }
-    commands[input-1]();
+    this->commands[input-1](this);
 }
 
 bool Environment::isInputInvalid(int input){

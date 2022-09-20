@@ -1,10 +1,12 @@
 #include "commands.h"
 
 
-void attack(){}
+void attack(Environment *environment){}
 
-void useItem(){}
+void useItem(Environment *environment){}
 
-void run(){}
+void run(Environment *environment){
+    environment->environmentRun();
+}
 
-void options(){}
+void options(Environment *environment){}

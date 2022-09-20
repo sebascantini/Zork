@@ -6,8 +6,9 @@
 class Environment{
     public:
         void playerTurn();
+        virtual void environmentRun() {}
     protected:
-        std::vector<void(*)()> commands;
+        std::vector<void(*)(Environment*)> commands;
     private:
         bool isInputInvalid(int Input);
 };

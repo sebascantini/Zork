@@ -6,6 +6,7 @@
 
 Combat::Combat(std::vector<Character*> enemies){
     commands = {attack, useItem, run, options};
+    this->enemies = enemies.size();
     this->characters = enemies;
     this->characters.push_back(player); // player in the back
     this->scheduler = new CombatScheduler(characters);
@@ -18,10 +19,14 @@ Combat::~Combat(){
 }
 
 void Combat::begin(){
-    while(player->getHealth() > 0 && characters.size() > 1){ //if (player->getHealth() > 0 && characters.size() == 1) then player is the only one alive
+    while(player->getHealth() > 0 && enemies > 0){ //if (player->getHealth() > 0 && characters.size() == 1) then player is the only one alive
         characters[scheduler->next()]->turn(this);
         this->show();
     }
+}
+
+void Combat::environmentRun(){
+    this->enemies = 0;
 }
 
 void Combat::show(){

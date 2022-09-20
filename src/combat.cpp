@@ -1,10 +1,11 @@
 #include <string>
 #include "interface.h"
 #include "player.h"
+#include "commands.h"
 #include "combat.h"
 
 Combat::Combat(std::vector<Character*> enemies){
-    commands = {};
+    commands = {attack, useItem, run, options};
     this->characters = enemies;
     this->characters.push_back(player); // player in the back
     this->scheduler = new CombatScheduler(characters);

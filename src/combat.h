@@ -10,6 +10,7 @@ class Combat : public Environment{
         ~Combat();
     private:
         CombatScheduler* scheduler;
+        std::vector<Character*> characters;
         void begin();
         void show();
 };

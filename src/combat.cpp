@@ -4,8 +4,10 @@
 #include "combat.h"
 
 Combat::Combat(std::vector<Character*> enemies){
-    this->scheduler = new CombatScheduler(enemies);
-    this->commands = {};
+    commands = {};
+    this->characters = enemies;
+    this->characters.push_back(player); // player in the back
+    this->scheduler = new CombatScheduler(characters);
     this->show();
     this->begin();
 }       
@@ -15,8 +17,8 @@ Combat::~Combat(){
 }
 
 void Combat::begin(){
-    while(scheduler->combatContinues()){
-        (scheduler->next())->turn(this);
+    while(player->getHealth() > 0 && characters.size() > 1){ //if (player->getHealth() > 0 && characters.size() == 1) then player is the only one alive
+        characters[scheduler->next()]->turn(this);
         this->show();
     }
 }

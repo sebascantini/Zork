@@ -7,11 +7,9 @@
 class CombatScheduler{
     public:
         CombatScheduler(std::vector<Character*> enemies);
-        Character* next();
-        bool combatContinues();
+        int next();
     private:
         std::vector<std::vector<int>> scheduling_table;
-        std::vector<Character*> characters;
 };
 
 #endif

@@ -7,10 +7,9 @@ class Environment{
     public:
         void playerTurn();
     protected:
-        std::vector<void (Environment::*)()> commands;
+        std::vector<void(*)()> commands;
     private:
-        bool isInputInvalid(int input);
-    
+        bool isInputInvalid(int Input);
 };
 
 #endif

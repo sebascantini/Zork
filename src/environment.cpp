@@ -6,8 +6,9 @@ void Environment::playerTurn(){
     while(this->isInputInvalid(input)){
         input = stoi(askForInput());
     }
+    //commands[input]();
 }
 
 bool Environment::isInputInvalid(int input){
-    return !(input >= 0 && input < this->commands.size());
+    return !(input >= 0 && input < this->commands.size() + 1);
 }

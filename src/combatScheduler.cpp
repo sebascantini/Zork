@@ -2,17 +2,13 @@
 #include <unistd.h>
 #include "combatScheduler.h"
 
-#include <iostream>
-
-CombatScheduler::CombatScheduler(std::vector<Character*> enemies){
-    characters = enemies;
-    characters.push_back(player);
-    
-    for(int i = 0; i < characters.size(); ++i)
+CombatScheduler::CombatScheduler(std::vector<Character*> characters){ // player is in last position
+    int i;
+    for(i = 0; i < characters.size(); ++i)
         scheduling_table.push_back({i, characters[i]->getSpeed(), 0});
 }
     
-Character* CombatScheduler::next(){
+int CombatScheduler::next(){
     int next_index = 0;
     float fastest_time = __INT_MAX__;
 
@@ -21,12 +17,12 @@ Character* CombatScheduler::next(){
     for(int i = 0; i < scheduling_table.size(); ++i){
         if(scheduling_table[i][2] >= 100){
             scheduling_table[i][2] = 0;
-            return characters[i];
+            return i;
         }
 
         int current_time = (100 - scheduling_table[i][2])/scheduling_table[i][1];
 
-        if(current_time < fastest_time){
+        if(current_time <= fastest_time){ // <= so that in returns the last fastest person (in case of a tie with the player, player has advantage)
             fastest_time = current_time;
             next_index = i;
         }
@@ -35,9 +31,5 @@ Character* CombatScheduler::next(){
     for(int i = 0; i < scheduling_table.size(); ++i)
         scheduling_table[i][2] = scheduling_table[i][2] + (scheduling_table[i][1] * fastest_time);
     scheduling_table[next_index][2] = 0;
-    return characters[next_index];
-}
-
-bool CombatScheduler::combatContinues(){
-    return player->getCurrentHealth() > 0 && characters.size() > 1;
+    return next_index;
 }

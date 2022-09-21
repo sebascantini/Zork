@@ -6,7 +6,7 @@
 
 class Combat : public Environment{
     public:
-        Combat(std::vector<Character*> enemies);
+        Combat(std::vector<Character*> &enemies);
         ~Combat();
         bool isActive() override;
         void next() override;
@@ -18,7 +18,7 @@ class Combat : public Environment{
         CombatScheduler* scheduler;
         std::vector<Character*> characters;
         int enemies;
-        void show();
+        void show() override;
 };
 
 #endif

@@ -13,6 +13,12 @@ class Environment{
         virtual void environmentUseItem() {}
         virtual void environmentRun() {}
         virtual void environmentOptions() {}
+        virtual void environmentMoveUp() {}
+        virtual void environmentMoveDown() {}
+        virtual void environmentMoveLeft() {}
+        virtual void environmentMoveRight() {}
+    private:
+        virtual void show() {}
 };
 
 extern Environment* environment;

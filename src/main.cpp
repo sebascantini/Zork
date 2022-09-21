@@ -1,6 +1,5 @@
 #include "player.h"
-#include "enemy.h"
-#include "combat.h"
+#include "location.h"
 #include <vector>
 
 std::vector<void(*)(Environment*)> commands;
@@ -10,7 +9,7 @@ Environment* environment;
 void boot(){
     commands = {};
     player = new Player();
-    environment = new Combat({new Enemy()});
+    environment = new Location();
 }
 
 int main(){

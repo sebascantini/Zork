@@ -3,7 +3,7 @@
 #include "commands.h"
 #include "combat.h"
 
-Combat::Combat(std::vector<Character*> enemies){
+Combat::Combat(std::vector<Character*> &enemies){
     commands = {attack, useItem, run, options};
     this->enemies = enemies.size();
     this->characters = enemies;

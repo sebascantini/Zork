@@ -1,4 +1,3 @@
-#include "player.h"
 #include <unistd.h>
 #include "combatScheduler.h"
 

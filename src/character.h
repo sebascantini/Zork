@@ -12,6 +12,7 @@ class Character{
         const int getHealth();
         const int getSpeed();
         const int getCurrentHealth();
+        const bool isAlive();
         void heal(int amount);
         void attack(Character* target);
         virtual void turn(Environment* environment) {};

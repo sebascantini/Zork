@@ -8,15 +8,16 @@ class Combat : public Environment{
     public:
         Combat(std::vector<Character*> enemies);
         ~Combat();
+        bool isActive() override;
+        void next() override;
         void environmentAttack() override;
         void environmentUseItem() override;
         void environmentRun() override;
         void environmentOptions() override;
     private:
         CombatScheduler* scheduler;
-        int enemies;
         std::vector<Character*> characters;
-        void begin();
+        int enemies;
         void show();
 };
 

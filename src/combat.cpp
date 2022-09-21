@@ -1,4 +1,3 @@
-#include <string>
 #include "interface.h"
 #include "player.h"
 #include "commands.h"
@@ -9,26 +8,26 @@ Combat::Combat(std::vector<Character*> enemies){
     this->enemies = enemies.size();
     this->characters = enemies;
     this->characters.push_back(player); // player in the back
-    this->scheduler = new CombatScheduler(characters);
+    this->scheduler = new CombatScheduler(this->characters);
     this->show();
-    this->begin();
 }       
 
 Combat::~Combat(){
     delete(this->scheduler);
 }
 
-void Combat::begin(){
-    while(player->getHealth() > 0 && enemies > 0){ //if (player->getHealth() > 0 && characters.size() == 1) then player is the only one alive
-        characters[scheduler->next()]->turn(this);
-        this->show();
-    }
+bool Combat::isActive(){
+    return (player->isAlive() && this->enemies > 0);
+}
+
+void Combat::next(){
+    characters[scheduler->next()]->turn(this);
+    this->show();
 }
 
 void Combat::environmentAttack(){
     player->attack(this->characters[0]);
-    if(this->characters[0]->getCurrentHealth() <= 0)
-        this->enemies--;
+    this->enemies -= !(this->characters[0]->isAlive()); // if enemy is dead -1 enemies
 }
 
 void Combat::environmentUseItem(){

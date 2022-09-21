@@ -6,6 +6,8 @@
 
 std::string askForInput();
 
+void askForCommand();
+
 void print(std::vector<std::string> screen);
 
 #endif

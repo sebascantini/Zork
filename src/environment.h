@@ -5,15 +5,17 @@
 
 class Environment{
     public:
-        void playerTurn();
+        virtual bool isActive(){return false;}
+        virtual void next(){}
+
+        //commands
         virtual void environmentAttack() {}
         virtual void environmentUseItem() {}
         virtual void environmentRun() {}
         virtual void environmentOptions() {}
-    protected:
-        std::vector<void(*)(Environment*)> commands;
-    private:
-        bool isInputInvalid(int Input);
 };
+
+extern Environment* environment;
+extern std::vector<void(*)(Environment*)> commands;
 
 #endif

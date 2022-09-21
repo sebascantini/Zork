@@ -21,6 +21,10 @@ const int Character::getCurrentHealth(){
     return this->current_health;
 }
 
+const bool Character::isAlive(){
+    return this->current_health > 0;
+}
+
 void Character::heal(int amount){
     this->current_health = std::min(this->current_health + amount, this->health);
 }

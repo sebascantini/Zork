@@ -1,6 +1,4 @@
-#include "interface.h"
 #include "player.h"
-#include <string>
 
 Player::Player(){
     this->name = "Player";

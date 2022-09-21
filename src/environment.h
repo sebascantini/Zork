@@ -6,7 +6,10 @@
 class Environment{
     public:
         void playerTurn();
+        virtual void environmentAttack() {}
+        virtual void environmentUseItem() {}
         virtual void environmentRun() {}
+        virtual void environmentOptions() {}
     protected:
         std::vector<void(*)(Environment*)> commands;
     private:

@@ -12,10 +12,11 @@ class Character{
         const int getHealth();
         const int getSpeed();
         const int getCurrentHealth();
+        void heal(int amount);
+        void attack(Character* target);
         virtual void turn(Environment* environment) {};
 
     protected:
-        void attack(Character* target);
         void getAttacked(int dmg);
         std::string name;
         int health;

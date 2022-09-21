@@ -10,5 +10,5 @@ void Environment::playerTurn(){
 }
 
 bool Environment::isInputInvalid(int input){
-    return !(input >= 0 && input < this->commands.size() + 1);
+    return !(input > 0 && input < this->commands.size() + 1);
 }

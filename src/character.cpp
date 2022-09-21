@@ -21,6 +21,10 @@ const int Character::getCurrentHealth(){
     return this->current_health;
 }
 
+void Character::heal(int amount){
+    this->current_health = std::min(this->current_health + amount, this->health);
+}
+
 void Character::attack(Character* target){
     target->getAttacked(this->outputDamage());
 }

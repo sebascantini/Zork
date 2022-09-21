@@ -25,8 +25,22 @@ void Combat::begin(){
     }
 }
 
+void Combat::environmentAttack(){
+    player->attack(this->characters[0]);
+    if(this->characters[0]->getCurrentHealth() <= 0)
+        this->enemies--;
+}
+
+void Combat::environmentUseItem(){
+    player->heal(50);
+}
+
 void Combat::environmentRun(){
     this->enemies = 0;
+}
+
+void Combat::environmentOptions(){
+
 }
 
 void Combat::show(){

@@ -7,7 +7,7 @@
 
 class Location : public Environment{
     public:
-        Location(Map& m);
+        Location(Map* m);
         bool isActive() override;
         void next() override;
         void environmentMoveUp() override;
@@ -15,7 +15,7 @@ class Location : public Environment{
         void environmentMoveLeft() override;
         void environmentMoveRight() override;
     protected:
-        Map map;
+        Map* map;
         std::pair<int, int> player_position;
     private:
         void show() override;

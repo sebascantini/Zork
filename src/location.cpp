@@ -3,13 +3,14 @@
 #include "enemy.h"
 #include "location.h"
 
-Location::Location(Map& m){
-    this->encounter();
+Location::Location(Map* m){
+    this->map = m;
+    this->player_position = map->getEntranceFrom(0);
     this->show();
 }
 
 bool Location::isActive(){
-    return false;
+    return true;
 }
 
 void Location::next(){
@@ -33,22 +34,8 @@ void Location::environmentMoveRight(){
 }
 
 void Location::show(){
-        print({
-        "",
+    std::vector<std::string> m{"",
         " ========= Location ============================================================================== ",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
         "",
         "",
         "",
@@ -63,11 +50,20 @@ void Location::show(){
         "",
         "",
         " =============================================================================================== ",
-        "",
-    });
+        ""}
+    ;
+
+    std::vector<std::string> m2 = this->map->getMap();
+
+    m2[player_position.first][player_position.second] = 'p';
+
+    for(int i = 0; i < m2.size(); ++i)
+        m.insert(m.begin() + i + 4, "       " + m2[i]);
+    
+    print(m);
 }
 
-void Location::encounter(){
+void Location::encounter(){ // shouldn't be here
     Environment* self = environment;
     std::vector<Character*> enemies = {new Enemy()};
     environment = new Combat(enemies);

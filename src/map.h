@@ -3,16 +3,19 @@
 
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 class Map{
     public:
-        Map();
-        std::pair<int, int> entrance();
+        Map(std::string file_name);
+        const int getID();
+        const std::vector<std::string> getMap();
+        const std::pair<int, int> getEntranceFrom(int prev_location_id);
         const bool isValid(int row, int column);
-        std::vector<std::string> get();
     private:
+        int id;
         std::vector<std::string> map;
-        std::pair<int, int> entrance;
+        std::unordered_map<int, std::pair<int, int>> starting_positions;
 };
 
 #endif

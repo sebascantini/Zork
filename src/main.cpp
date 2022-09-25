@@ -9,7 +9,8 @@ Environment* environment;
 void boot(){
     commands = {};
     player = new Player();
-    environment = new Location();
+    Map* m = new Map("test01");
+    environment = new Location(m);
 }
 
 int main(){

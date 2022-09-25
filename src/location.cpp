@@ -3,7 +3,7 @@
 #include "enemy.h"
 #include "location.h"
 
-Location::Location(){
+Location::Location(Map& m){
     this->encounter();
     this->show();
 }

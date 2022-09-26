@@ -3,13 +3,15 @@
 #include <vector>
 
 Player* player;
+std::vector<std::string> maps;
 
 void boot(){
     player = new Player();
+    maps = {"test01"};
 }
 
 int main(){
     boot();
-    runContext(new Location(new Map("test01")));
+    runContext(new Location(0));
     delete(player);
 }

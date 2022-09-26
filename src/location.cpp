@@ -4,11 +4,9 @@
 #include "enemy.h"
 #include "location.h"
 
-Location::Location(Map* m){
+Location::Location(int map_id){
     this->commands = {&Location::moveUp, &Location::moveDown, &Location::moveLeft, &Location::moveRight, &Location::exit};
-    this->map = m;
-    this->player_position = map->getEntranceFrom(0);
-    this->show();
+    this->loadMap(0, map_id);
 }
 
 bool Location::isActive(){
@@ -37,12 +35,27 @@ void Location::moveRight(){
     this->movePlayerTo(this->player_position.first, this->player_position.second + 1);
 }
 
-
 void Location::movePlayerTo(int row, int column){
     if(map->isValid(row, column))
         this->player_position = std::make_pair(row, column);
+    this->changeMap(map->getNextMapID(this->player_position));
     if(chance(15))
         this->triggerEncounter();
+}
+
+void Location::changeMap(int next_map_id){
+    if(next_map_id == -1)
+        return;
+
+    int previous_map_id = map->getID();
+    delete(map);
+    this->loadMap(previous_map_id, next_map_id);
+}
+
+void Location::loadMap(int previous_map_id, int next_map_id){
+    map = new Map(next_map_id);
+    this->player_position = map->getEntranceFrom(previous_map_id);
+    this->show();
 }
 
 void Location::exit(){

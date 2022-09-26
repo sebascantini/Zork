@@ -1,5 +1,6 @@
 #include "combat.h"
 #include "interface.h"
+#include "probability.h"
 #include "enemy.h"
 #include "location.h"
 
@@ -21,23 +22,26 @@ void Location::next(){
 }
 
 void Location::moveUp(){
-    if(map->isValid(this->player_position.first - 1, this->player_position.second))
-        this->player_position = std::make_pair(this->player_position.first - 1, this->player_position.second); 
+    this->movePlayerTo(this->player_position.first - 1, this->player_position.second);
 }
 
 void Location::moveDown(){
-    if(map->isValid(this->player_position.first + 1, this->player_position.second))
-        this->player_position = std::make_pair(this->player_position.first + 1, this->player_position.second);
+    this->movePlayerTo(this->player_position.first + 1, this->player_position.second);
 }
 
 void Location::moveLeft(){
-    if(map->isValid(this->player_position.first, this->player_position.second - 1))
-        this->player_position = std::make_pair(this->player_position.first, this->player_position.second - 1);
+    this->movePlayerTo(this->player_position.first, this->player_position.second - 1);
 }
 
 void Location::moveRight(){
-    if(map->isValid(this->player_position.first, this->player_position.second + 1))
-        this->player_position = std::make_pair(this->player_position.first, this->player_position.second + 1);
+    this->movePlayerTo(this->player_position.first, this->player_position.second + 1);
+}
+
+void Location::movePlayerTo(int row, int column){
+    if(map->isValid(row, column))
+        this->player_position = std::make_pair(row, column);
+    if(chance(15))
+        this->triggerEncounter();
 }
 
 void Location::show(){
@@ -70,7 +74,7 @@ void Location::show(){
     print(screen);
 }
 
-void Location::encounter(){
+void Location::triggerEncounter(){
     std::vector<Character*> enemies = {new Enemy()};
     runContext(new Combat(enemies));
     this->show();

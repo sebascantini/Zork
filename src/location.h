@@ -19,8 +19,9 @@ class Location : public Context{
         void moveDown();
         void moveLeft();
         void moveRight();
+        void movePlayerTo(int row, int column);
         void show() override;
-        void encounter();
+        void triggerEncounter();
 };
 
 #endif

@@ -10,6 +10,6 @@ class Context{
         virtual void show() {}
 };
 
-void runContext(Context* context_to_run);
+void runContext(Context* context);
 
 #endif

@@ -1,7 +1,7 @@
 #include "context.h"
 
-void runContext(Context* context_to_run){
-    while(context_to_run->isActive())
-        context_to_run->next();
-    delete(context_to_run);
+void runContext(Context* context){
+    while(context->isActive())
+        context->next();
+    delete(context);
 }

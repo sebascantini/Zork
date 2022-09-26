@@ -2,9 +2,9 @@
 #include "combatScheduler.h"
 
 CombatScheduler::CombatScheduler(std::vector<Character*> &characters){ // player is in last position
-    characters_ptr = &characters;
+    this->characters_ptr = &characters;
     for(int i = 0; i < characters.size(); ++i)
-        scheduling_table.push_back({i, characters[i]->getSpeed(), 0});
+        this->scheduling_table.push_back({i, characters[i]->getSpeed(), 0});
 }
     
 int CombatScheduler::next(){
@@ -13,7 +13,7 @@ int CombatScheduler::next(){
 
     sleep(1);
 
-    for(int i = 0; i < scheduling_table.size(); ++i){
+    for(int i = 0; i < this->scheduling_table.size(); ++i){
         if((*this->characters_ptr)[i]->getCurrentHealth() > 0){
         if(this->scheduling_table[i][2] >= 100){
             this->scheduling_table[i][2] = 0;
@@ -29,8 +29,8 @@ int CombatScheduler::next(){
     }
     }
 
-    for(int i = 0; i < scheduling_table.size(); ++i)
-        scheduling_table[i][2] = scheduling_table[i][2] + (scheduling_table[i][1] * fastest_time);
-    scheduling_table[next_index][2] = 0;
+    for(int i = 0; i < this->scheduling_table.size(); ++i)
+        this->scheduling_table[i][2] = this->scheduling_table[i][2] + (this->scheduling_table[i][1] * fastest_time);
+    this->scheduling_table[next_index][2] = 0;
     return next_index;
 }

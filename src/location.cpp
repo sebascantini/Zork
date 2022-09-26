@@ -18,7 +18,7 @@ void Location::next(){
 }
 
 void Location::show(){
-    std::vector<std::string> m{"",
+    std::vector<std::string> screen{"",
         " ========= Location ============================================================================== ",
         "",
         "",
@@ -37,14 +37,14 @@ void Location::show(){
         ""}
     ;
 
-    std::vector<std::string> m2 = this->map->getMap();
+    std::vector<std::string> map_copy = this->map->getMap();
 
-    m2[player_position.first][player_position.second] = 'p';
+    map_copy[player_position.first][player_position.second] = 'p'; // place player in map
 
-    for(int i = 0; i < m2.size(); ++i)
-        m.insert(m.begin() + i + 4, "       " + m2[i]);
+    for(int i = 0; i < map_copy.size(); ++i) // insert map
+        screen.insert(screen.begin() + i + 4, "       " + map_copy[i]);
     
-    print(m);
+    print(screen);
 }
 
 void Location::encounter(){

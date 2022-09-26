@@ -20,7 +20,7 @@ bool Combat::isActive(){
 }
 
 void Combat::next(){
-    characters[scheduler->next()]->turn(this);
+    this->characters[this->scheduler->next()]->turn(this);
     this->show();
 }
 

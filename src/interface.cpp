@@ -11,9 +11,8 @@ std::string askForInput(){
 
 const int askForInt(int max){
     int input = stoi(askForInput());
-    while(input < 1 || input > max){
+    while(input < 1 || input > max)
         input = stoi(askForInput());
-    }
     return input;
 }
 

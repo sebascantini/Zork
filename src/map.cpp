@@ -39,5 +39,8 @@ const std::pair<int, int> Map::getEntranceFrom(int previous_location_id){
 }
 
 const bool Map::isValid(int row, int column){
-    return this->map[row][column] == '#';
+    if (row < 0 || row >= this->map.size() || column < 0 || column >= this->map[0].size()) // if out of bounds
+        return false;
+    
+    return this->map[row][column] == '.';
 }

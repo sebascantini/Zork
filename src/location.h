@@ -14,6 +14,11 @@ class Location : public Context{
         Map* map;
         std::pair<int, int> player_position;
     private:
+        std::vector<void (Location::*)()> commands;
+        void moveUp();
+        void moveDown();
+        void moveLeft();
+        void moveRight();
         void show() override;
         void encounter();
 };

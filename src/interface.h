@@ -6,7 +6,7 @@
 
 std::string askForInput();
 
-void askForCommand();
+const int askForInt(int max = 10);
 
 void print(std::vector<std::string> screen);
 

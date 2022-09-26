@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdlib>
-#include "environment.h"
+#include "context.h"
 #include "interface.h"
 
 std::string askForInput(){
@@ -9,12 +9,12 @@ std::string askForInput(){
     return input;
 }
 
-void askForCommand(){
+const int askForInt(int max){
     int input = stoi(askForInput());
-    while(input < 1 || input > commands.size()){
+    while(input < 1 || input > max){
         input = stoi(askForInput());
     }
-    commands[input-1](environment);
+    return input;
 }
 
 void printLine(std::string s){

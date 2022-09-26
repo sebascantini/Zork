@@ -10,26 +10,10 @@ Location::Location(Map* m){
 }
 
 bool Location::isActive(){
-    return true;
+    return false;
 }
 
 void Location::next(){
-    
-}
-
-void Location::environmentMoveUp(){
-    
-}
-
-void Location::environmentMoveDown(){
-    
-}
-
-void Location::environmentMoveLeft(){
-    
-}
-
-void Location::environmentMoveRight(){
     
 }
 
@@ -63,15 +47,8 @@ void Location::show(){
     print(m);
 }
 
-void Location::encounter(){ // shouldn't be here
-    Environment* self = environment;
+void Location::encounter(){
     std::vector<Character*> enemies = {new Enemy()};
-    environment = new Combat(enemies);
-        while(environment->isActive()){
-        environment->next();
-    }
-    delete(enemies[0]);
-    delete(environment);
-    environment = self;
+    runContext(new Combat(enemies));
     this->show();
 }

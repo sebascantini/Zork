@@ -11,6 +11,6 @@ Player::Player(){
     this->weapon = new Weapon();
 }
 
-void Player::turn(Environment* environment){
-    askForCommand();
+void Player::turn(Context* context){
+    context->playerTurn();
 }

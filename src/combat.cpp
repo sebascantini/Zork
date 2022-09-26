@@ -1,10 +1,9 @@
 #include "interface.h"
 #include "player.h"
-#include "commands.h"
 #include "combat.h"
 
 Combat::Combat(std::vector<Character*> &enemies){
-    commands = {attack, useItem, run, options};
+    this->commands = {&Combat::attack, &Combat::useItem, &Combat::run, &Combat::options};
     this->enemies = enemies.size();
     this->characters = enemies;
     this->characters.push_back(player); // player in the back
@@ -25,20 +24,25 @@ void Combat::next(){
     this->show();
 }
 
-void Combat::environmentAttack(){
+void Combat::playerTurn(){
+    int input = askForInt(this->commands.size());
+    (this->*this->commands[input - 1])();
+}
+
+void Combat::attack(){
     player->attack(this->characters[0]);
     this->enemies -= !(this->characters[0]->isAlive()); // if enemy is dead -1 enemies
 }
 
-void Combat::environmentUseItem(){
+void Combat::useItem(){
     player->heal(50);
 }
 
-void Combat::environmentRun(){
+void Combat::run(){
     this->enemies = 0;
 }
 
-void Combat::environmentOptions(){
+void Combat::options(){
 
 }
 

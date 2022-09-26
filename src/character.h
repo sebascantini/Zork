@@ -2,7 +2,7 @@
 #define CHARACTER_H
 
 #include <string>
-#include "environment.h"
+#include "context.h"
 #include "weapon.h"
 
 class Character{
@@ -13,12 +13,12 @@ class Character{
         const int getSpeed();
         const int getCurrentHealth();
         const bool isAlive();
-        void heal(int amount);
+        void heal(const int amount);
         void attack(Character* target);
-        virtual void turn(Environment* environment) {};
+        virtual void turn(Context* context) {};
 
     protected:
-        void getAttacked(int dmg);
+        void getAttacked(const int damage);
         std::string name;
         int health;
         int defence;
@@ -29,7 +29,7 @@ class Character{
 
     private:
         const int outputDamage();
-        const int inputDamage(const int dmg);
+        const int inputDamage(const int damage);
 };
 
 #endif

@@ -5,14 +5,14 @@
 #include "location.h"
 
 Location::Location(Map* m){
-    this->commands = {&Location::moveUp, &Location::moveDown, &Location::moveLeft, &Location::moveRight};
+    this->commands = {&Location::moveUp, &Location::moveDown, &Location::moveLeft, &Location::moveRight, &Location::exit};
     this->map = m;
     this->player_position = map->getEntranceFrom(0);
     this->show();
 }
 
 bool Location::isActive(){
-    return true;
+    return this->is_active;
 }
 
 void Location::next(){
@@ -37,11 +37,16 @@ void Location::moveRight(){
     this->movePlayerTo(this->player_position.first, this->player_position.second + 1);
 }
 
+
 void Location::movePlayerTo(int row, int column){
     if(map->isValid(row, column))
         this->player_position = std::make_pair(row, column);
     if(chance(15))
         this->triggerEncounter();
+}
+
+void Location::exit(){
+    this->is_active = false;
 }
 
 void Location::show(){
@@ -58,6 +63,7 @@ void Location::show(){
         "    2. Move Down",
         "    3. Move Left",
         "    4. Move Right",
+        "    5. Quit"
         "",
         "",
         " =============================================================================================== ",

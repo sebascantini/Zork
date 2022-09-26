@@ -14,12 +14,14 @@ class Location : public Context{
         Map* map;
         std::pair<int, int> player_position;
     private:
+        bool is_active = true;
         std::vector<void (Location::*)()> commands;
         void moveUp();
         void moveDown();
         void moveLeft();
         void moveRight();
         void movePlayerTo(int row, int column);
+        void exit();
         void show() override;
         void triggerEncounter();
 };

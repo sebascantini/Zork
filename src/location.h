@@ -1,31 +1,15 @@
 #ifndef LOCATION_H
 #define LOCATION_H
 
-#include "context.h"
-#include "character.h"
-#include "map.h"
+#include <vector>
 
-class Location : public Context{
+class Location{
     public:
-        Location(int map_id);
-        bool isActive() override;
-        void next() override;
-    protected:
-        Map* map;
-        std::pair<int, int> player_position;
+        void addNearbyLocation(int location_id);
+        int getNearbyLocation(int edge_id);
+        int getEdgeOf(int location_id);
     private:
-        bool is_active = true;
-        std::vector<void (Location::*)()> commands;
-        void moveUp();
-        void moveDown();
-        void moveLeft();
-        void moveRight();
-        void movePlayerTo(int row, int column);
-        void exit();
-        void changeMap(int next_map_id);
-        void loadMap(int previous_map_id, int next_map_id);
-        void show() override;
-        void triggerEncounter();
+        std::vector<int> nearby_locations;
 };
 
 #endif

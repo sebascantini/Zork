@@ -22,7 +22,7 @@ Map::Map(int map_id)
     while(!map_file.eof()){
         int map_id, exit_x, exit_y;
         map_file >> map_id >> exit_x >> exit_y; 
-        this->connections.push_back(std::make_pair(map_id, std::make_pair(exit_x, exit_y)));
+        this->edgePositions.push_back(std::make_pair(exit_x, exit_y));
     }
 }
 
@@ -34,26 +34,15 @@ const std::vector<std::string> Map::getMap(){
     return this->map;
 }
 
-std::pair<int, int> primarySearch(std::vector<std::pair<int, std::pair<int, int>>> &v, int elem){
-    for(int i = 0; i < v.size(); ++i)
-        if(v[i].first == elem)
-            return v[i].second;
-    return {};
-}
-
-int secondarySearch(std::vector<std::pair<int, std::pair<int, int>>> &v, std::pair<int, int> elem){
-    for(int i = 0; i < v.size(); ++i)
-        if(v[i].second == elem)
-            return v[i].first;
+const int Map::getNextMapEdge(std::pair<int, int> position){
+    for(int i = 0; i < edgePositions.size();++i)
+        if(edgePositions[i] == position)
+            return i;
     return -1;
 }
 
-const int Map::getNextMapID(std::pair<int, int> position){
-    return secondarySearch(this->connections, position);
-}
-
-const std::pair<int, int> Map::getEntranceFrom(int previous_location_id){
-    return primarySearch(this->connections, previous_location_id);
+const std::pair<int, int> Map::getEntranceFrom(int previous_location_edge){
+    return this->edgePositions[previous_location_edge];
 }
 
 const bool Map::isValid(int row, int column){

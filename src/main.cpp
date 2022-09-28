@@ -1,17 +1,14 @@
+#include "game.h"
 #include "player.h"
-#include "location.h"
-#include <vector>
+#include "world.h"
 
 Player* player;
-std::vector<std::string> maps;
-
-void boot(){
-    player = new Player();
-    maps = {"test01"};
-}
 
 int main(){
-    boot();
-    runContext(new Location(0));
+    player = new Player();
+    loadWorld();
+    runContext(new Game());
+    unloadWorld();
     delete(player);
+    return 0;
 }

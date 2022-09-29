@@ -1,4 +1,3 @@
-#include "game.h"
 #include "player.h"
 #include "world.h"
 
@@ -6,9 +5,7 @@ Player* player;
 
 int main(){
     player = new Player();
-    loadWorld();
-    runContext(new Game());
-    unloadWorld();
+    runContext(new World());
     delete(player);
     return 0;
 }

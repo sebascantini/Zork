@@ -1,14 +1,27 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include "map.h"
+#include "context.h"
+#include "character.h"
+#include "locationManager.h"
+#include <vector>
 
-void loadWorld();
-
-void unloadWorld();
-
-std::pair<Map*, std::pair<int, int>> loadLocation(int location_id);
-
-std::pair<Map*, std::pair<int, int>> moveLocation(int location_edge);
+class World : public Context{
+    public:
+        World();
+        ~World();
+        bool isActive() override;
+        void next() override;
+    private:
+        bool is_active = true;
+        std::vector<void (World::*)()> commands;
+        LocationManager* location_manager;
+        void moveUp();
+        void moveDown();
+        void moveLeft();
+        void moveRight();
+        void exit();
+        void show() override;
+};
 
 #endif

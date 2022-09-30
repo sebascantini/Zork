@@ -11,10 +11,13 @@ class Location{
         const std::vector<Location*> getNearbyLocations();
         void load();
         void unload();
+        Location* getNextLocation();
         bool movePlayerUp();
         bool movePlayerDown();
         bool movePlayerLeft();
         bool movePlayerRight();
+        bool movePlayerTo(int new_player_position_x, int new_player_position_y);
+        bool placePlayerFrom(Location* previous_location, int entrance_shift_x, int entrance_shift_y);
         bool playerIsOnExit();
         const std::vector<std::string> getMap();
     private:

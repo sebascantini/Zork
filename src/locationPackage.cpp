@@ -5,7 +5,7 @@
 #include "enemy.h"
 
 #define MAP_FOLDER "files/maps/"
-#define FILE_EXTENTION ".map"
+#define FILE_EXTENTION ".location"
 #define SUCCESS true;
 #define FAILURE false;
 
@@ -26,11 +26,10 @@ LocationPackage::LocationPackage(std::string file_name){
         int exit_x, exit_y;
         location_file >> exit_x >> exit_y;
         this->contents[hash(exit_x, exit_y)] = i;
+        this->entrances.push_back(std::make_pair(exit_x, exit_y));
     }
 
     location_file.close();
-
-    player_position = std::make_pair(9, 0);
 }
 
 const std::string LocationPackage::getName(){
@@ -41,6 +40,14 @@ const std::vector<std::string> LocationPackage::getMap(){
     std::vector<std::string> map_copy = this->map;
     map_copy[player_position.first][player_position.second] = 'p';
     return map_copy;
+}
+
+int LocationPackage::getExitID(){
+    return this->contents[hash(this->player_position.first, this->player_position.second)];
+}
+
+std::pair<int, int> LocationPackage::getEntranceFrom(int origin_id){
+    return this->entrances[origin_id];
 }
 
 int LocationPackage::hash(int x, int y){
@@ -70,7 +77,6 @@ bool LocationPackage::movePlayerTo(int new_player_position_x, int new_player_pos
         player_position = std::make_pair(new_player_position_x, new_player_position_y);
         return SUCCESS;
     }
-    
     return FAILURE;
 }
 

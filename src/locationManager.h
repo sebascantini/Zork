@@ -15,8 +15,8 @@ class LocationManager{
     private:
         Location* current_location;
         std::vector<Location*> nearby_locations;
-        void validateLocation();
-        void changeLocation();
+        void load(Location* location);
+        void changeLocation(int entrance_shift_x, int entrance_shift_y);
 };
 
 #endif

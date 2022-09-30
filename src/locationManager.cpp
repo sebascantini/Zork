@@ -1,7 +1,6 @@
 #include <fstream>
 #include <sstream>
 #include "locationManager.h"
-#include "interface.h"
 
 #define world_file "files/maps/connectivity.world"
 
@@ -34,42 +33,50 @@ LocationManager::LocationManager(){
     for(int i = 0; i < location_streams.size(); ++i)
         delete(location_streams[i]);
 
-    this->current_location = locations[0];
-    this->current_location->load();
+    this->load(locations[0]);
+    this->current_location->movePlayerTo(9, 1);
+
 }
 
 LocationManager::~LocationManager(){
     delete(this->current_location);
 }
 
-void LocationManager::changeLocation(){
-    print({"lexicon"});
-    sleep(1);
+void LocationManager::load(Location* location){
+    this->current_location = location;
+    this->nearby_locations = this->current_location->getNearbyLocations();
+    this->current_location->load();
 }
 
-void LocationManager::validateLocation(){
-    if(this->current_location->playerIsOnExit())
-        this->changeLocation();
+void LocationManager::changeLocation(int entrance_shift_x, int entrance_shift_y){
+    Location* previous_location = current_location;
+    Location* next_location = previous_location->getNextLocation();
+    this->load(next_location);
+    this->current_location->placePlayerFrom(previous_location, entrance_shift_x, entrance_shift_y);
 }
 
 void LocationManager::movePlayerUp(){
     if(this->current_location->movePlayerUp())
-        this->validateLocation();
+        if(this->current_location->playerIsOnExit())
+            this->changeLocation(-1, 0);
 }
 
 void LocationManager::movePlayerDown(){
     if(this->current_location->movePlayerDown())
-        this->validateLocation();
+        if(this->current_location->playerIsOnExit())
+            this->changeLocation(1, 0);
 }
 
 void LocationManager::movePlayerLeft(){
     if(this->current_location->movePlayerLeft())
-        this->validateLocation();
+        if(this->current_location->playerIsOnExit())
+            this->changeLocation(0, -1);
 }
 
 void LocationManager::movePlayerRight(){
     if(this->current_location->movePlayerRight())
-        this->validateLocation();
+        if(this->current_location->playerIsOnExit())
+            this->changeLocation(0, 1);
 }
 
 const std::vector<std::string> LocationManager::getMap(){

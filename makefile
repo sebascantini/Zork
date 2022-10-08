@@ -10,16 +10,16 @@ OBJ := bin/
 SOURCES := $(wildcard $(SRC)*.cpp)
 DEPS = $(wildcard $(HSRC)*.h)
 # $(patsubst %.cpp,%.o,$(SRCS)): substitute all ".cpp" file name strings to ".o" file name strings
-OBJECTS := $(patsubst $(SRC)%.cpp,$(OBJ)%.o,$(SOURCES))
+OBJECTS := $(patsubst %.cpp,%.o,$(SOURCES))
 
 
 %.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(NAME): $(OBJECTS)
-	$(CC) -o $@ $(patsubst $(SRC)%,$(OBJ)%,$^) $(CFLAGS)
+	$(CC) -o $@ $^ $(CFLAGS)
 
 .PHONY: clean
 
 clean:
-	rm -f $(NAME) $(OBJ)*.o *~ core $(INCDIR)/*~
+	rm -f $(NAME) $(SRC)*.o *~ core $(INCDIR)/*~

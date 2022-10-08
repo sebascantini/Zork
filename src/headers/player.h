@@ -13,4 +13,7 @@ class Player: public Character{
 
 extern Player* player;
 
+void initializePlayer();
+void deletePlayer();
+
 #endif

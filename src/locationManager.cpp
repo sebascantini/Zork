@@ -1,8 +1,10 @@
 #include <fstream>
 #include "headers/fileSystem.h"
 #include "headers/locationManager.h"
+#include "headers/player.h"
 
 LocationManager::LocationManager(){
+    initializePlayer();
     this->current_location = loadWorld();
     this->commands[KEY_CODE_UP] = &LocationManager::moveUp;
     this->commands[KEY_CODE_DOWN] = &LocationManager::moveDown;
@@ -13,6 +15,7 @@ LocationManager::LocationManager(){
 }
 
 LocationManager::~LocationManager(){
+    deletePlayer();
     delete(this->current_location);
 }
 

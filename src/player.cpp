@@ -1,6 +1,8 @@
 #include "headers/interface.h"
 #include "headers/player.h"
 
+Player* player;
+
 Player::Player(){
     this->name = "Player";
     this->health = 100;
@@ -13,4 +15,12 @@ Player::Player(){
 
 void Player::turn(Context* context){
     context->playerTurn();
+}
+
+void initializePlayer(){
+    player = new Player();
+}
+
+void deletePlayer(){
+    delete(player);
 }

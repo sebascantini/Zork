@@ -1,18 +1,14 @@
-#include "headers/player.h"
-#include "headers/locationManager.h"
-#include "headers/options.h"
 #include "headers/interface.h"
+#include "headers/mainMenu.h"
+#include "headers/options.h"
 
-Player* player;
 Options* options;
 
 int main(){
     initiateScreen();
     options = new Options();
-    player = new Player();
-    runContext(new LocationManager());
-    delete(player);
-    delete(options);
+    MainMenu *main_menu = new MainMenu();
+    runContext(main_menu);
     deleteScreen();
     return 0;
 }

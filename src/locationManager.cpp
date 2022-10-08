@@ -2,7 +2,7 @@
 #include <sstream>
 #include "locationManager.h"
 
-#define world_file "files/maps/connectivity.world"
+#define world_file "shared/maps/connectivity.world"
 
 LocationManager::LocationManager(){
     std::ifstream connectivity_file (world_file);

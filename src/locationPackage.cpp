@@ -4,7 +4,7 @@
 #include "combat.h"
 #include "enemy.h"
 
-#define MAP_FOLDER "files/maps/"
+#define MAP_FOLDER "shared/maps/"
 #define FILE_EXTENTION ".location"
 #define SUCCESS true;
 #define FAILURE false;

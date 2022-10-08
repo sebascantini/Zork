@@ -10,11 +10,11 @@ OBJ := bin/
 SOURCES := $(wildcard $(SRC)*.cpp)
 DEPS = $(wildcard $(HSRC)*.h)
 # $(patsubst %.cpp,%.o,$(SRCS)): substitute all ".cpp" file name strings to ".o" file name strings
-OBJECTS := $(patsubst %.cpp,%.o,$(SOURCES))
+OBJECTS := $(patsubst $(SRC)%.cpp,$(OBJ)%.o,$(SOURCES))
 
 
 %.o: %.cpp $(DEPS)
-	$(CC) -c -o $(patsubst $(SRC)%,$(OBJ)%,$@) $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(NAME): $(OBJECTS)
 	$(CC) -o $@ $(patsubst $(SRC)%,$(OBJ)%,$^) $(CFLAGS)

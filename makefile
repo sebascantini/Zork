@@ -18,7 +18,6 @@ $(OBJ)/%.o: $(SRC)/%.cpp $(DEPS)
 
 $(NAME): $(OBJECTS)
 	$(CC) -o $@ $^ $(CFLAGS)
-	rm -f $(SRC)*.o
 	@ clear
 
 .PHONY: clean

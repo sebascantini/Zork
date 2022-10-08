@@ -7,7 +7,7 @@
 
 class LocationPackage{
     public:
-        LocationPackage(std::string file_name);
+        LocationPackage(std::string location_name, std::vector<std::string> location_map, std::unordered_map<int, int> location_contents, std::vector<std::pair<int, int>> location_entrances);
         const std::string getName();
         const std::vector<std::string> getMap();
         int getExitID();

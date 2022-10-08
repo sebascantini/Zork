@@ -1,12 +1,12 @@
-#ifndef COMBATSCHEDULER_H
-#define COMBATSCHEDULER_H
+#ifndef SCHEDULER_H
+#define SCHEDULER_H
 
 #include <vector>
 #include "character.h"
 
-class CombatScheduler{
+class Scheduler{
     public:
-        CombatScheduler(std::vector<Character*> &characters);
+        Scheduler(std::vector<Character*> &characters);
         int next();
     private:
         std::vector<std::vector<int>> scheduling_table;

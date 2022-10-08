@@ -1,4 +1,3 @@
-#include <fstream>
 #include <math.h>
 #include "headers/locationPackage.h"
 #include "headers/combat.h"
@@ -9,27 +8,11 @@
 #define SUCCESS true;
 #define FAILURE false;
 
-LocationPackage::LocationPackage(std::string file_name){
-    int limit;
-    std::ifstream location_file (MAP_FOLDER + file_name + FILE_EXTENTION);
-
-    location_file >> this->name;
-    location_file >> limit;
-    for(int i = 0; i < limit; ++i){
-        std::string map_row;
-        location_file >> map_row;
-        this->map.push_back(map_row);
-    }
-    
-    location_file >> limit;
-    for(int i = 0; i < limit; ++i){
-        int exit_x, exit_y;
-        location_file >> exit_x >> exit_y;
-        this->contents[hash(exit_x, exit_y)] = i;
-        this->entrances.push_back(std::make_pair(exit_x, exit_y));
-    }
-
-    location_file.close();
+LocationPackage::LocationPackage(std::string location_name, std::vector<std::string> location_map, std::unordered_map<int, int> location_contents, std::vector<std::pair<int, int>> location_entrances){
+    this->name = location_name;
+    this->map = location_map;
+    this->contents = location_contents;
+    this->entrances = location_entrances;
 }
 
 const std::string LocationPackage::getName(){

@@ -1,4 +1,5 @@
 #include "headers/location.h"
+#include "headers/fileSystem.h"
 
 #define FAILURE false;
 
@@ -20,7 +21,7 @@ const std::vector<Location*> Location::getNearbyLocations(){
 
 void Location::load(){
     this->unload();
-    this->location_package = new LocationPackage(this->file_name);
+    this->location_package = loadLocation(this->file_name);
 }
 
 void Location::unload(){

@@ -2,7 +2,7 @@
 #define COMBAT_H
 
 #include "context.h"
-#include "combatScheduler.h"
+#include "scheduler.h"
 
 class Combat : public Context{
     public:
@@ -12,7 +12,7 @@ class Combat : public Context{
         void next() override;
         void playerTurn() override;
     private:
-        CombatScheduler* scheduler;
+        Scheduler* scheduler;
         std::vector<void (Combat::*)()> commands;
         std::vector<Character*> characters;
         int enemies;

@@ -1,42 +1,10 @@
 #include <fstream>
-#include <sstream>
 #include "headers/interface.h"
+#include "headers/fileSystem.h"
 #include "headers/locationManager.h"
 
-#define world_file "shared/maps/connectivity.world"
-
 LocationManager::LocationManager(){
-    std::ifstream connectivity_file (world_file);
-    
-    std::string temporary_file_line;
-    std::vector<std::istringstream*> location_streams;
-    std::vector<Location*> locations;
-
-    while(std::getline(connectivity_file, temporary_file_line)){
-        std::istringstream* file_line = new std::istringstream (temporary_file_line);
-        location_streams.push_back(file_line);
-    }
-
-    connectivity_file.close();
-
-    for(int i = 0; i < location_streams.size(); ++i){
-        std::string file_name;
-        *location_streams[i] >> file_name;
-        locations.push_back(new Location(file_name));
-    }
-
-    for(int i = 0; i < locations.size(); ++i){
-        int location_index;
-        while(*location_streams[i] >> location_index)
-            locations[i]->addNearbyLocation(locations[location_index]);
-    }
-
-    for(int i = 0; i < location_streams.size(); ++i)
-        delete(location_streams[i]);
-
-    this->load(locations[0]);
-    this->current_location->movePlayerTo(9, 1);
-
+    this->current_location = loadWorld();
     this->commands = {&LocationManager::moveUp, &LocationManager::moveDown, &LocationManager::moveLeft, &LocationManager::moveRight, &LocationManager::exit};
     this->show();
 }

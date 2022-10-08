@@ -7,7 +7,7 @@ Combat::Combat(std::vector<Character*> &enemies){
     this->enemies = enemies.size();
     this->characters = enemies;
     this->characters.push_back(player); // player in the back
-    this->scheduler = new CombatScheduler(this->characters);
+    this->scheduler = new Scheduler(this->characters);
     this->show();
 }       
 

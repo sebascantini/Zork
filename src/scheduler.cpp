@@ -1,17 +1,14 @@
-#include <unistd.h>
-#include "headers/combatScheduler.h"
+#include "headers/scheduler.h"
 
-CombatScheduler::CombatScheduler(std::vector<Character*> &characters){ // player is in last position
+Scheduler::Scheduler(std::vector<Character*> &characters){ // player is in last position
     this->characters_ptr = &characters;
     for(int i = 0; i < characters.size(); ++i)
         this->scheduling_table.push_back({i, characters[i]->getSpeed(), 0});
 }
     
-int CombatScheduler::next(){
+int Scheduler::next(){
     int next_index = 0;
     float fastest_time = __INT_MAX__;
-
-    sleep(1);
 
     for(int i = 0; i < this->scheduling_table.size(); ++i){
         if((*this->characters_ptr)[i]->getCurrentHealth() > 0){

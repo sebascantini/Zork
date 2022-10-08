@@ -1,6 +1,6 @@
-#include "interface.h"
-#include "player.h"
-#include "combat.h"
+#include "headers/interface.h"
+#include "headers/player.h"
+#include "headers/combat.h"
 
 Combat::Combat(std::vector<Character*> &enemies){
     this->commands = {&Combat::attack, &Combat::useItem, &Combat::run, &Combat::options};

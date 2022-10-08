@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include "combatScheduler.h"
+#include "headers/combatScheduler.h"
 
 CombatScheduler::CombatScheduler(std::vector<Character*> &characters){ // player is in last position
     this->characters_ptr = &characters;

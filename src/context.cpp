@@ -1,4 +1,4 @@
-#include "context.h"
+#include "headers/context.h"
 
 void runContext(Context* context){
     while(context->isActive())

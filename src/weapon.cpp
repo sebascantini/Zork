@@ -1,4 +1,4 @@
-#include "weapon.h"
+#include "headers/weapon.h"
 
 Weapon::Weapon(){
     this->base_damage = 15;

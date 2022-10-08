@@ -1,11 +1,11 @@
-#include "player.h"
-#include "world.h"
+#include "headers/player.h"
+#include "headers/locationManager.h"
 
 Player* player;
 
 int main(){
     player = new Player();
-    runContext(new World());
+    runContext(new LocationManager());
     delete(player);
     return 0;
 }

@@ -1,5 +1,5 @@
-#include "interface.h"
-#include "player.h"
+#include "headers/interface.h"
+#include "headers/player.h"
 
 Player::Player(){
     this->name = "Player";

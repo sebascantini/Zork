@@ -1,6 +1,6 @@
 #include <iostream>
-#include "context.h"
-#include "interface.h"
+#include "headers/context.h"
+#include "headers/interface.h"
 
 std::string askForInput(){
     std::string input;

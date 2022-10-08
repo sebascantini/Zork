@@ -1,5 +1,5 @@
-#include "enemy.h"
-#include "player.h"
+#include "headers/enemy.h"
+#include "headers/player.h"
 
 Enemy::Enemy(){
    this->name = "Enemy";

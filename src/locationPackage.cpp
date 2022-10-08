@@ -1,8 +1,8 @@
 #include <fstream>
 #include <math.h>
-#include "locationPackage.h"
-#include "combat.h"
-#include "enemy.h"
+#include "headers/locationPackage.h"
+#include "headers/combat.h"
+#include "headers/enemy.h"
 
 #define MAP_FOLDER "shared/maps/"
 #define FILE_EXTENTION ".location"

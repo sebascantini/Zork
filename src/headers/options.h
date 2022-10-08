@@ -14,10 +14,10 @@ class Options{
 extern Options* options;
 
 //input key codes
-#define KEY_CODE_UP 1;
-#define KEY_CODE_DOWN 2;
-#define KEY_CODE_LEFT 3;
-#define KEY_CODE_RIGHT 4;
-#define KEY_CODE_OPTIONS 5;
+#define KEY_CODE_UP 1
+#define KEY_CODE_DOWN 2
+#define KEY_CODE_LEFT 3
+#define KEY_CODE_RIGHT 4
+#define KEY_CODE_OPTIONS 5
 
 #endif

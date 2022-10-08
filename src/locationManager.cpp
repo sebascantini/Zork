@@ -4,11 +4,11 @@
 
 LocationManager::LocationManager(){
     this->current_location = loadWorld();
-    this->commands[1] = &LocationManager::moveUp;
-    this->commands[2] = &LocationManager::moveDown;
-    this->commands[3] = &LocationManager::moveLeft;
-    this->commands[4] = &LocationManager::moveRight;
-    this->commands[5] = &LocationManager::exit;
+    this->commands[KEY_CODE_UP] = &LocationManager::moveUp;
+    this->commands[KEY_CODE_DOWN] = &LocationManager::moveDown;
+    this->commands[KEY_CODE_LEFT] = &LocationManager::moveLeft;
+    this->commands[KEY_CODE_RIGHT] = &LocationManager::moveRight;
+    this->commands[KEY_CODE_OPTIONS] = &LocationManager::exit;
     this->show();
 }
 

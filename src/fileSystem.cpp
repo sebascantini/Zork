@@ -3,8 +3,8 @@
 #include <math.h>
 #include "headers/fileSystem.h"
 
-#define WORLD_FILE "shared/maps/connectivity.world"
 #define MAP_FOLDER "shared/maps/"
+#define WORLD_FILE "shared/maps/connectivity.world"
 #define MAP_FILE_EXTENTION ".location"
 
 Location* loadWorld(){

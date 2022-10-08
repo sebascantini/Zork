@@ -1,9 +1,8 @@
-#include "headers/interface.h"
 #include "headers/player.h"
 #include "headers/combat.h"
 
 Combat::Combat(std::vector<Character*> &enemies){
-    this->commands = {&Combat::attack, &Combat::useItem, &Combat::run, &Combat::options};
+    this->commands = {&Combat::attack, &Combat::useItem, &Combat::run};
     this->enemies = enemies.size();
     this->characters = enemies;
     this->characters.push_back(player); // player in the back
@@ -25,8 +24,8 @@ void Combat::next(){
 }
 
 void Combat::playerTurn(){
-    int input = askForInt(this->commands.size());
-    (this->*this->commands[input - 1])();
+    int input = getControl();
+    (this->*this->commands[input])();
 }
 
 void Combat::attack(){
@@ -40,10 +39,6 @@ void Combat::useItem(){
 
 void Combat::run(){
     this->enemies = 0;
-}
-
-void Combat::options(){
-
 }
 
 void Combat::show(){

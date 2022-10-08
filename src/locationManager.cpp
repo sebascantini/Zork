@@ -1,11 +1,14 @@
 #include <fstream>
-#include "headers/interface.h"
 #include "headers/fileSystem.h"
 #include "headers/locationManager.h"
 
 LocationManager::LocationManager(){
     this->current_location = loadWorld();
-    this->commands = {&LocationManager::moveUp, &LocationManager::moveDown, &LocationManager::moveLeft, &LocationManager::moveRight, &LocationManager::exit};
+    this->commands[1] = &LocationManager::moveUp;
+    this->commands[2] = &LocationManager::moveDown;
+    this->commands[3] = &LocationManager::moveLeft;
+    this->commands[4] = &LocationManager::moveRight;
+    this->commands[5] = &LocationManager::exit;
     this->show();
 }
 
@@ -18,8 +21,8 @@ bool LocationManager::isActive(){
 }
 
 void LocationManager::next(){
-    int input = askForInt(this->commands.size());
-    (this->*this->commands[input - 1])();
+    int input = getControl();
+    (this->*this->commands[input])();
     this->show();
 }
 

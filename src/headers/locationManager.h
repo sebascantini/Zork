@@ -17,7 +17,7 @@ class LocationManager : public Context{
         bool is_active = true;
         Location* current_location;
         std::vector<Location*> nearby_locations;
-        std::vector<void (LocationManager::*)()> commands;
+        std::unordered_map<int, void (LocationManager::*)()> commands;
         void moveUp();
         void moveDown();
         void moveLeft();

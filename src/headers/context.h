@@ -1,6 +1,9 @@
 #ifndef CONTEXT_H
 #define CONTEXT_H
 
+#include "interface.h"
+#include "options.h"
+
 class Context{
     public:
         virtual bool isActive(){return false;}

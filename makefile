@@ -1,5 +1,5 @@
 CC := g++
-CFLAGS := -Isrc/headers
+CFLAGS := -Isrc/headers -lcurses
 NAME := run
 
 SRC := src/
@@ -18,6 +18,8 @@ OBJECTS := $(patsubst %.cpp,%.o,$(SOURCES))
 
 $(NAME): $(OBJECTS)
 	$(CC) -o $@ $^ $(CFLAGS)
+	rm -f $(SRC)*.o
+	@ clear
 
 .PHONY: clean
 

@@ -3,11 +3,13 @@
 
 #include <string>
 #include <vector>
-#include <unistd.h>
 
-std::string askForInput();
+const int getInput();
 
-const int askForInt(int max = __INT_MAX__);
+const int getControl();
+
+void initiateScreen();
+void deleteScreen();
 
 void print(std::vector<std::string> screen);
 

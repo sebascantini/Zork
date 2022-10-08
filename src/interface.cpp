@@ -1,26 +1,36 @@
-#include <iostream>
+#include <curses.h>
+#include <bits/stdc++.h> 
 #include "headers/context.h"
 #include "headers/interface.h"
+#include "headers/options.h"
 
-std::string askForInput(){
-    std::string input;
-    std::cin >> input;
-    return input;
+const int getInput(){
+    timeout(-1);
+    int c = getch();
+    return (int) c;
 }
 
-const int askForInt(int max){
-    int input = stoi(askForInput());
-    while(input < 1 || input > max)
-        input = stoi(askForInput());
-    return input;
+void initiateScreen(){
+    initscr();
+}
+
+void deleteScreen(){
+    endwin();
+}
+
+const int getControl(){
+    int input = getInput();
+    while(options->getInputCode(input) == -1)
+        input = getInput();
+    return options->getInputCode(input);
 }
 
 void printLine(std::string s){
-    std::cout << s << std::endl;
+    printw((s+'\n').c_str());
 }
 
 void print(std::vector<std::string> screen){
-    system("clear");
+    clear();
 
     for(int i = 0; i < screen.size(); ++i)
         printLine(screen[i]);

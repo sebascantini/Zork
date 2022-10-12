@@ -3,7 +3,7 @@
 #include <ostream>
 #include "headers/context.h"
 #include "headers/interface.h"
-#include "headers/options.h"
+#include "headers/settings.h"
 
 void initializeInterface(){
     initscr();
@@ -21,8 +21,8 @@ const int getControl(){
     int input;
     do
         input = getInput();
-    while(options->getInputCode(input) == -1);
-    return options->getInputCode(input);
+    while(settings->getInputCode(input) == -1);
+    return settings->getInputCode(input);
 }
 
 void printLine(std::string s){

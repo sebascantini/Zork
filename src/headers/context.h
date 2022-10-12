@@ -2,7 +2,7 @@
 #define CONTEXT_H
 
 #include "interface.h"
-#include "options.h"
+#include "settings.h"
 
 class Context{
     public:

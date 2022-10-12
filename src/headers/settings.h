@@ -1,20 +1,20 @@
-#ifndef OPTIONS_H
-#define OPTIONS_H
+#ifndef SETTINGS_H
+#define SETTINGS_H
 
 #include <unordered_map>
 
-class Options{
+class Settings{
     public:
-        Options();
+        Settings();
         int getInputCode(int key_code);
     private:
         std::unordered_map<int, int> controls;
 };
 
-void initializeOptions();
-void finalizeOptions();
+void initializeSettings();
+void finalizeSettings();
 
-extern Options* options;
+extern Settings* settings;
 
 //input key codes
 #define KEY_CODE_UP 1

@@ -1,15 +1,15 @@
 #include "headers/interface.h"
 #include "headers/mainMenu.h"
-#include "headers/options.h"
+#include "headers/settings.h"
 
 void initialize(){
     initializeInterface();
-    initializeOptions();
+    initializeSettings();
 }
 
 void finalize(){
     finalizeInterface();
-    finalizeOptions();
+    finalizeSettings();
 }
 
 int main(){

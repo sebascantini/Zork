@@ -1,9 +1,12 @@
-#include "headers/player.h"
 #include "headers/combat.h"
+#include "headers/interface.h"
+#include "headers/player.h"
 #include "headers/settings.h"
 
+int selection;
+bool selected;
+
 Combat::Combat(std::vector<Character*> &enemies){
-    this->commands = {&Combat::attack, &Combat::useItem, &Combat::run};
     this->enemies = enemies.size();
     this->characters = enemies;
     this->characters.push_back(player); // player in the back
@@ -25,8 +28,34 @@ void Combat::next(){
 }
 
 void Combat::playerTurn(){
-    int input = getControl();
-    (this->*this->commands[input])();
+    selection = 0;
+    selected = false;
+    while(!selected){
+        getInput(this);
+    }
+    switch(selection){
+        case 0:
+            this->attack();
+            break;
+        case 1:
+            this->useItem();
+            break;
+        case 2:
+            this->run();
+            break;
+    }
+}
+
+void Combat::moveUp(){
+    selection = std::min(selection - 1, 0);
+}
+
+void Combat::moveDown(){
+    selection = std::min(selection + 1, 2);
+}
+
+void Combat::options(){
+    selected = true;
 }
 
 void Combat::attack(){

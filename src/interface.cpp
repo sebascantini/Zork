@@ -1,7 +1,6 @@
 #include <bits/stdc++.h> 
 #include <curses.h>
 #include <ostream>
-#include "headers/context.h"
 #include "headers/interface.h"
 #include "headers/settings.h"
 
@@ -13,16 +12,32 @@ void finalizeInterface(){
     endwin();
 }
 
-const int getInput(){
+const int getKey(){
     return (int) getch();
 }
 
-const int getControl(){
+void getInput(Context* context){
     int input;
     do
-        input = getInput();
+        input = getKey();
     while(settings->getInputCode(input) == -1);
-    return settings->getInputCode(input);
+    switch(settings->getInputCode(input)){
+        case KEY_CODE_UP:
+            context->moveUp();
+            break;
+        case KEY_CODE_DOWN:
+            context->moveDown();
+            break;
+        case KEY_CODE_LEFT:
+            context->moveLeft();
+            break;
+        case KEY_CODE_RIGHT:
+            context->moveRight();
+            break;
+        case KEY_CODE_OPTIONS:
+            context->options();
+            break;
+    }
 }
 
 void printLine(std::string s){

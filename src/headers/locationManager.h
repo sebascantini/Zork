@@ -12,19 +12,19 @@ class LocationManager : public Context{
         ~LocationManager();
         bool isActive() override;
         void next() override;
+        void moveUp() override;
+        void moveDown() override;
+        void moveLeft() override;
+        void moveRight() override;
+        void options() override;
         const std::vector<std::string> getMap();
     private:
         bool is_active = true;
         Location* current_location;
         std::vector<Location*> nearby_locations;
-        std::unordered_map<int, void (LocationManager::*)()> commands;
-        void moveUp();
-        void moveDown();
-        void moveLeft();
-        void moveRight();
+        void triggerEncounter();
         void load(Location* location);
         void changeLocation(int entrance_shift_x, int entrance_shift_y);
-        void exit();
         void show() override;
 };
  

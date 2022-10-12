@@ -10,16 +10,17 @@ class Combat : public Context{
         ~Combat();
         bool isActive() override;
         void next() override;
-        void playerTurn() override;
+        void playerTurn();
+        void moveUp() override;
+        void moveDown() override;
+        void options() override;
     private:
         Scheduler* scheduler;
-        std::vector<void (Combat::*)()> commands;
         std::vector<Character*> characters;
         int enemies;
         void attack();
         void useItem();
         void run();
-        void options();
         void show() override;
 };
 

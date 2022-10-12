@@ -1,12 +1,13 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
+#include "context.h"
 #include <string>
 #include <vector>
 
-const int getInput();
+const int getKey();
 
-const int getControl();
+void getInput(Context* context);
 
 void initializeInterface();
 void finalizeInterface();

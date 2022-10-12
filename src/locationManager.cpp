@@ -1,15 +1,14 @@
+#include "headers/combat.h"
+#include "headers/enemy.h"
 #include "headers/fileSystem.h"
+#include "headers/interface.h"
 #include "headers/locationManager.h"
 #include "headers/player.h"
+
 
 LocationManager::LocationManager(){
     initializePlayer();
     this->current_location = loadWorld();
-    this->commands[KEY_CODE_UP] = &LocationManager::moveUp;
-    this->commands[KEY_CODE_DOWN] = &LocationManager::moveDown;
-    this->commands[KEY_CODE_LEFT] = &LocationManager::moveLeft;
-    this->commands[KEY_CODE_RIGHT] = &LocationManager::moveRight;
-    this->commands[KEY_CODE_OPTIONS] = &LocationManager::exit;
     this->show();
 }
 
@@ -23,8 +22,7 @@ bool LocationManager::isActive(){
 }
 
 void LocationManager::next(){
-    int input = getControl();
-    (this->*this->commands[input])();
+    getInput(this);
     this->show();
 }
 
@@ -57,6 +55,7 @@ void LocationManager::moveLeft(){
     if(this->current_location->movePlayerLeft())
         if(this->current_location->playerIsOnExit())
             this->changeLocation(0, -1);
+    triggerEncounter();
 }
 
 void LocationManager::moveRight(){
@@ -69,8 +68,13 @@ const std::vector<std::string> LocationManager::getMap(){
     return this->current_location->getMap();
 }
 
-void LocationManager::exit(){
+void LocationManager::options(){
     this->is_active = false;
+}
+
+void LocationManager::triggerEncounter(){
+    std::vector<Character*> enemies = {new Enemy};
+    runContext(new Combat(enemies));
 }
 
 void LocationManager::show(){
@@ -91,8 +95,8 @@ void LocationManager::show(){
         "",
         "",
         " =============================================================================================== ",
-        ""}
-    ;
+        ""
+    };
     std::vector<std::string> map_copy = this->getMap();
 
     for(int i = 0; i < map_copy.size(); ++i) // insert map

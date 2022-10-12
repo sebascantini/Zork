@@ -6,6 +6,7 @@
 
 void initializeInterface(){
     initscr();
+    keypad(stdscr, TRUE);
 }
 
 void finalizeInterface(){
@@ -18,9 +19,10 @@ const int getKey(){
 
 void getInput(Context* context){
     int input;
-    do
+    do{
         input = getKey();
-    while(settings->getInputCode(input) == -1);
+        context->show();
+    }while(settings->getInputCode(input) == -1);
     switch(settings->getInputCode(input)){
         case KEY_CODE_UP:
             context->moveUp();
@@ -33,6 +35,9 @@ void getInput(Context* context){
             break;
         case KEY_CODE_RIGHT:
             context->moveRight();
+            break;
+        case KEY_CODE_SELECT:
+            context->select();
             break;
         case KEY_CODE_OPTIONS:
             context->options();

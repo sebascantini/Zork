@@ -6,13 +6,19 @@
 class MainMenu : public Context{
     public:
         MainMenu();
-        ~MainMenu();
         bool isActive() override;
         void next() override;
+        void moveUp() override;
+        void moveDown() override;
+        void select() override;
+        void show() override;
     private:
         bool is_active = true;
+        void newGame();
+        void loadGame();
+        void settings();
         void exit();
-        void show() override;
+        std::string selection(int item);
 };
  
 #endif

@@ -3,7 +3,6 @@
 #include "headers/player.h"
 #include "headers/settings.h"
 
-int selection;
 bool selected;
 
 Combat::Combat(std::vector<Character*> &enemies){
@@ -28,12 +27,13 @@ void Combat::next(){
 }
 
 void Combat::playerTurn(){
-    selection = 0;
+    this->selector = 0;
     selected = false;
     while(!selected){
         getInput(this);
+        this->show();
     }
-    switch(selection){
+    switch(this->selector){
         case 0:
             this->attack();
             break;
@@ -47,14 +47,14 @@ void Combat::playerTurn(){
 }
 
 void Combat::moveUp(){
-    selection = std::min(selection - 1, 0);
+    this->selector = std::max(this->selector - 1, 0);
 }
 
 void Combat::moveDown(){
-    selection = std::min(selection + 1, 2);
+    this->selector = std::min(this->selector + 1, 2);
 }
 
-void Combat::options(){
+void Combat::select(){
     selected = true;
 }
 
@@ -69,6 +69,10 @@ void Combat::useItem(){
 
 void Combat::run(){
     this->enemies = 0;
+}
+
+std::string Combat::selection(int item){
+    return (this->selector == item) ? "->" : "";
 }
 
 void Combat::show(){
@@ -95,9 +99,9 @@ void Combat::show(){
         "    MP: ",
         "",
         "",
-        "    1. Attack (20 dmg)",
-        "    2. Heal (+50 hp)",
-        "    3. Run (exit battle)",
+        "    " + selection(0) + " Attack (20 dmg)",
+        "    " + selection(1) + " Heal (+50 hp)",
+        "    " + selection(2) + " Run (exit battle)",
         "",
         "",
         " =============================================================================================== ",

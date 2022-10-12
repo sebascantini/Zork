@@ -18,13 +18,13 @@ class LocationManager : public Context{
         void moveLeft() override;
         void moveRight() override;
         void options() override;
+        void show() override;
     private:
         bool is_active = true;
         LocationNode* current_location;
         LocationPackage* location_data;
         void changeLocation(int entrance_shift_x, int entrance_shift_y);
         void movePlayer(int shift_x, int shift_y);
-        void show() override;
         void attemptEncounter();
         void triggerEncounter();
 };

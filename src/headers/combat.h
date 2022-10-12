@@ -13,7 +13,8 @@ class Combat : public Context{
         void playerTurn();
         void moveUp() override;
         void moveDown() override;
-        void options() override;
+        void select() override;
+        void show() override;
     private:
         Scheduler* scheduler;
         std::vector<Character*> characters;
@@ -21,7 +22,7 @@ class Combat : public Context{
         void attack();
         void useItem();
         void run();
-        void show() override;
+        std::string selection(int item);
 };
 
 #endif

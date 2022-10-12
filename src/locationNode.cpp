@@ -1,7 +1,4 @@
 #include "headers/locationNode.h"
-#include "headers/fileSystem.h"
-
-#define FAILURE false;
 
 LocationNode::LocationNode(std::string file_name){
     this->file_name = file_name;

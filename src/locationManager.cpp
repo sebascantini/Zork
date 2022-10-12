@@ -3,6 +3,7 @@
 #include "headers/interface.h"
 #include "headers/locationManager.h"
 #include "headers/player.h"
+#include "headers/math.h"
 
 #include "headers/enemy.h" // to remove in further update
 
@@ -107,7 +108,8 @@ void LocationManager::show(){
 }
 
 void LocationManager::attemptEncounter(){
-    
+    if(tryEvent(0.05))
+        triggerEncounter();
 }
 
 void LocationManager::triggerEncounter(){

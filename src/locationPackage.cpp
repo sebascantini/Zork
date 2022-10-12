@@ -1,10 +1,6 @@
-#include "headers/combat.h"
-#include "headers/enemy.h"
 #include "headers/locationPackage.h"
 #include "headers/math.h"
 
-#define MAP_FOLDER "shared/maps/"
-#define FILE_EXTENTION ".location"
 #define SUCCESS true;
 #define FAILURE false;
 

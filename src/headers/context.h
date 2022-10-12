@@ -9,10 +9,12 @@ class Context{
         virtual void moveDown() {}
         virtual void moveLeft() {}
         virtual void moveRight() {}
+        virtual void select() {}
         virtual void options() {}
         virtual void playerTurn(){}
-    private:
         virtual void show() {}
+    protected:
+        int selector = 0;
 };
 
 void runContext(Context* context);

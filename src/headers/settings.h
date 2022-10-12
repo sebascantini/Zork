@@ -21,6 +21,7 @@ extern Settings* settings;
 #define KEY_CODE_DOWN 2
 #define KEY_CODE_LEFT 3
 #define KEY_CODE_RIGHT 4
-#define KEY_CODE_OPTIONS 5
+#define KEY_CODE_SELECT 5
+#define KEY_CODE_OPTIONS 6
 
 #endif

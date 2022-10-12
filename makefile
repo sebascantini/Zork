@@ -1,5 +1,5 @@
 CC := g++
-CFLAGS := -Isrc/headers -lcurses
+CFLAGS := -Isrc/headers -lcurses `pkg-config --libs libbsd`
 NAME := run
 
 SRC := src
@@ -20,7 +20,7 @@ $(NAME): $(OBJECTS)
 	$(CC) -o $@ $^ $(CFLAGS)
 	@ clear
 
-.PHONY: clean
+.PHONY: clean test
 
 clean:
 	rm -f $(NAME) $(OBJ)/*.o *~ core $(INCDIR)/*~

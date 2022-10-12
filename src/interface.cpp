@@ -14,15 +14,14 @@ void finalizeInterface(){
 }
 
 const int getInput(){
-    timeout(-1);
-    int c = getch();
-    return (int) c;
+    return (int) getch();
 }
 
 const int getControl(){
-    int input = getInput();
-    while(options->getInputCode(input) == -1)
+    int input;
+    do
         input = getInput();
+    while(options->getInputCode(input) == -1);
     return options->getInputCode(input);
 }
 

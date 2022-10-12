@@ -8,8 +8,8 @@ const int getInput();
 
 const int getControl();
 
-void initiateScreen();
-void deleteScreen();
+void initializeInterface();
+void finalizeInterface();
 
 void print(std::vector<std::string> screen);
 

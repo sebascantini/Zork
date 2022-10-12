@@ -1,5 +1,7 @@
-#include <curses.h>
 #include <bits/stdc++.h> 
+#include <curses.h>
+#include <ostream>
+#include <signal.h>
 #include "headers/context.h"
 #include "headers/interface.h"
 #include "headers/options.h"
@@ -10,14 +12,6 @@ const int getInput(){
     return (int) c;
 }
 
-void initiateScreen(){
-    initscr();
-}
-
-void deleteScreen(){
-    endwin();
-}
-
 const int getControl(){
     int input = getInput();
     while(options->getInputCode(input) == -1)
@@ -25,8 +19,16 @@ const int getControl(){
     return options->getInputCode(input);
 }
 
+void initializeInterface(){
+    initscr();
+}
+
+void finalizeInterface(){
+    endwin();
+}
+
 void printLine(std::string s){
-    printw((s+'\n').c_str());
+    wprintw(stdscr, (s+'\n').c_str());
 }
 
 void print(std::vector<std::string> screen){

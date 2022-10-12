@@ -1,11 +1,8 @@
 #include "headers/options.h"
+#include "headers/fileSystem.h"
 
 Options::Options(){
-    this->controls[119] = KEY_CODE_UP;
-    this->controls[115] = KEY_CODE_DOWN;
-    this->controls[97] = KEY_CODE_LEFT;
-    this->controls[100] = KEY_CODE_RIGHT;
-    this->controls[27] = KEY_CODE_OPTIONS;
+    this->controls = loadControls();
 }
 
 int Options::getInputCode(int key_code){

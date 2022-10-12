@@ -1,4 +1,3 @@
-#include <fstream>
 #include "headers/fileSystem.h"
 #include "headers/locationManager.h"
 #include "headers/player.h"
@@ -84,11 +83,11 @@ void LocationManager::show(){
         " =============================================================================================== ",
         "",
         "",
-        "    1. Move Up",
-        "    2. Move Down",
-        "    3. Move Left",
-        "    4. Move Right",
-        "    5. Quit"
+        "    w. Move Up",
+        "    s. Move Down",
+        "    a. Move Left",
+        "    d. Move Right",
+        "    esc. Quit"
         "",
         "",
         " =============================================================================================== ",

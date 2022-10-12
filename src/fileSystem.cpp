@@ -1,11 +1,39 @@
+#include <filesystem>
 #include <fstream>
-#include <sstream>
-#include <math.h>
 #include "headers/fileSystem.h"
+#include <math.h>
+#include <sstream>
+
+#define SETTINGS_FOLDER "settings/"
+#define SETTINGS_DEFAULT_FOLDER "settings/default/"
 
 #define MAP_FOLDER "shared/maps/"
-#define WORLD_FILE "shared/maps/connectivity.world"
 #define MAP_FILE_EXTENTION ".location"
+#define WORLD_FILE "shared/maps/connectivity.world"
+
+namespace fs = std::filesystem;
+
+int hash(int x, int y){
+    return pow(2, x) * (2 * y + 1);
+}
+
+std::ifstream loadOptions(std::string file_name){
+    std::ifstream file (SETTINGS_FOLDER + file_name);
+    if(!file.is_open()){
+        fs::copy(SETTINGS_DEFAULT_FOLDER + file_name, SETTINGS_FOLDER + file_name);
+        file.open(SETTINGS_FOLDER + file_name);
+    }
+    return file;
+}
+
+std::unordered_map<int, int> loadControls(){
+    std::ifstream file = loadOptions("controls");
+    std::unordered_map<int, int> controls;
+    int key_code, key_id;
+    while(file >> key_code >> key_id)
+        controls[key_id] = key_code;
+    return controls;
+}
 
 Location* loadWorld(){
     std::ifstream connectivity_file (WORLD_FILE);
@@ -40,10 +68,6 @@ Location* loadWorld(){
     locations[0]->load();
     locations[0]->movePlayerTo(9, 1);
     return locations[0];
-}
-
-int hash(int x, int y){
-    return pow(2, x) * (2 * y + 1);
 }
 
 LocationPackage* loadLocation(std::string file_name){

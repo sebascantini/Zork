@@ -1,14 +1,24 @@
 #include "headers/interface.h"
 #include "headers/mainMenu.h"
 #include "headers/options.h"
+#include <iostream>
 
 Options* options;
 
-int main(){
-    initiateScreen();
+void boot(){
+    initializeInterface();
     options = new Options();
-    MainMenu *main_menu = new MainMenu();
-    runContext(main_menu);
-    deleteScreen();
+}
+
+void finalize(){
+    delete(options);
+    finalizeInterface();
+}
+
+int main(){
+    boot();
+    runContext(new MainMenu());
+    std::cout << "corn" << std::endl;
+    finalize();
     return 0;
 }

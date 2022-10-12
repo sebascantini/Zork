@@ -1,12 +1,12 @@
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
 
-#include "location.h"
+#include "locationNode.h"
 #include "locationPackage.h"
 #include <unordered_map>
 
 std::unordered_map<int, int> loadControls();
-Location* loadWorld();
+LocationNode* loadWorld();
 LocationPackage* loadLocation(std::string file_name);
 
 #endif

@@ -3,7 +3,8 @@
 
 #include "context.h"
 #include "character.h"
-#include "location.h"
+#include "locationNode.h"
+#include "locationPackage.h"
 #include <vector>
 
 class LocationManager : public Context{
@@ -17,15 +18,15 @@ class LocationManager : public Context{
         void moveLeft() override;
         void moveRight() override;
         void options() override;
-        const std::vector<std::string> getMap();
     private:
         bool is_active = true;
-        Location* current_location;
-        std::vector<Location*> nearby_locations;
-        void triggerEncounter();
-        void load(Location* location);
+        LocationNode* current_location;
+        LocationPackage* location_data;
         void changeLocation(int entrance_shift_x, int entrance_shift_y);
+        void movePlayer(int shift_x, int shift_y);
         void show() override;
+        void attemptEncounter();
+        void triggerEncounter();
 };
  
 #endif

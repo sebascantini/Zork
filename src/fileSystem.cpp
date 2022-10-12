@@ -1,7 +1,7 @@
 #include <filesystem>
 #include <fstream>
 #include "headers/fileSystem.h"
-#include <math.h>
+#include "headers/math.h"
 #include <sstream>
 
 #define SETTINGS_FOLDER "settings/"
@@ -12,10 +12,6 @@
 #define WORLD_FILE "shared/maps/connectivity.world"
 
 namespace fs = std::filesystem;
-
-int hash(int x, int y){
-    return pow(2, x) * (2 * y + 1);
-}
 
 std::ifstream loadOptions(std::string file_name){
     std::ifstream file (SETTINGS_FOLDER + file_name);
@@ -35,12 +31,12 @@ std::unordered_map<int, int> loadControls(){
     return controls;
 }
 
-Location* loadWorld(){
+LocationNode* loadWorld(){
     std::ifstream connectivity_file (WORLD_FILE);
     
     std::string temporary_file_line;
     std::vector<std::istringstream*> location_streams;
-    std::vector<Location*> locations;
+    std::vector<LocationNode*> locations;
 
 
     while(std::getline(connectivity_file, temporary_file_line)){
@@ -53,7 +49,7 @@ Location* loadWorld(){
     for(int i = 0; i < location_streams.size(); ++i){
         std::string file_name;
         *location_streams[i] >> file_name;
-        locations.push_back(new Location(file_name));
+        locations.push_back(new LocationNode(file_name));
     }
 
     for(int i = 0; i < locations.size(); ++i){
@@ -64,9 +60,7 @@ Location* loadWorld(){
 
     for(int i = 0; i < location_streams.size(); ++i)
         delete(location_streams[i]);
-
-    locations[0]->load();
-    locations[0]->movePlayerTo(9, 1);
+        
     return locations[0];
 }
 

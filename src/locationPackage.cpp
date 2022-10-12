@@ -1,7 +1,7 @@
-#include <math.h>
-#include "headers/locationPackage.h"
 #include "headers/combat.h"
 #include "headers/enemy.h"
+#include "headers/locationPackage.h"
+#include "headers/math.h"
 
 #define MAP_FOLDER "shared/maps/"
 #define FILE_EXTENTION ".location"
@@ -33,24 +33,8 @@ std::pair<int, int> LocationPackage::getEntranceFrom(int origin_id){
     return this->entrances[origin_id];
 }
 
-int LocationPackage::hash(int x, int y){
-    return pow(2, x) * (2 * y + 1);
-}
-
-bool LocationPackage::movePlayerUp(){
-    return this->movePlayerTo(this->player_position.first - 1, this->player_position.second);
-}
-
-bool LocationPackage::movePlayerDown(){
-    return this->movePlayerTo(this->player_position.first + 1, this->player_position.second);
-}
-
-bool LocationPackage::movePlayerLeft(){
-    return this->movePlayerTo(this->player_position.first, this->player_position.second - 1);
-}
-
-bool LocationPackage::movePlayerRight(){
-    return this->movePlayerTo(this->player_position.first, this->player_position.second + 1);
+bool LocationPackage::movePlayer(int shift_x, int shift_y){
+    return this->movePlayerTo(this->player_position.first + shift_x, this->player_position.second + shift_y);
 }
 
 bool LocationPackage::movePlayerTo(int new_player_position_x, int new_player_position_y){
@@ -64,11 +48,6 @@ bool LocationPackage::movePlayerTo(int new_player_position_x, int new_player_pos
 }
 
 bool LocationPackage::playerIsOnExit(){
-    int player_position_hash = this->hash(this->player_position.first, this->player_position.second);
+    int player_position_hash = hash(this->player_position.first, this->player_position.second);
     return this->contents.find(player_position_hash) != this->contents.end();
-}
-
-void LocationPackage::triggerEncounter(){
-    std::vector<Character*> enemies = {new Enemy()};
-    runContext(new Combat(enemies));
 }

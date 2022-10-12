@@ -12,10 +12,7 @@ class LocationPackage{
         const std::vector<std::string> getMap();
         int getExitID();
         std::pair<int, int> getEntranceFrom(int origin_id);
-        bool movePlayerUp();
-        bool movePlayerDown();
-        bool movePlayerLeft();
-        bool movePlayerRight();
+        bool movePlayer(int shift_x, int shift_y);
         bool movePlayerTo(int new_player_position_x, int new_player_position_y);
         bool playerIsOnExit();
     private:
@@ -24,8 +21,6 @@ class LocationPackage{
         std::pair<int, int> player_position;
         std::unordered_map<int, int> contents;
         std::vector<std::pair<int, int>> entrances;
-        int hash(int x, int y);
-        void triggerEncounter();
 };
 
 #endif

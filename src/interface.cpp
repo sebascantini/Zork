@@ -1,10 +1,17 @@
 #include <bits/stdc++.h> 
 #include <curses.h>
 #include <ostream>
-#include <signal.h>
 #include "headers/context.h"
 #include "headers/interface.h"
 #include "headers/options.h"
+
+void initializeInterface(){
+    initscr();
+}
+
+void finalizeInterface(){
+    endwin();
+}
 
 const int getInput(){
     timeout(-1);
@@ -17,14 +24,6 @@ const int getControl(){
     while(options->getInputCode(input) == -1)
         input = getInput();
     return options->getInputCode(input);
-}
-
-void initializeInterface(){
-    initscr();
-}
-
-void finalizeInterface(){
-    endwin();
 }
 
 void printLine(std::string s){

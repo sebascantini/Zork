@@ -11,6 +11,9 @@ class Options{
         std::unordered_map<int, int> controls;
 };
 
+void initializeOptions();
+void finalizeOptions();
+
 extern Options* options;
 
 //input key codes

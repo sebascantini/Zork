@@ -4,6 +4,7 @@
 #include "headers/interface.h"
 #include "headers/locationManager.h"
 #include "headers/math.h"
+#include "headers/player.h"
 
 
 LocationManager::LocationManager(){
@@ -74,29 +75,13 @@ void LocationManager::options(){
 
 void LocationManager::show(){
     int i = 0;
-    std::vector<std::string> screen{"",
-        " ========= World =============================================================================== ",
-        "",
-        "",
-        "",
-        "",
-        " =============================================================================================== ",
-        "",
-        "",
-        "    " + selection(i++) + " Inventory",
-        "    " + selection(i++) + " Settings (coming soon)",
-        "    " + selection(i++) + " Quit",
-        "",
-        "",
-        " =============================================================================================== ",
-        ""
-    };
-    std::vector<std::string> map_copy = this->location_data->getMap();
-
-    for(int i = 0; i < map_copy.size(); ++i) // insert map
-        screen.insert(screen.begin() + i + 4, "       " + map_copy[i]);
-    
-    interface->print(screen);
+    interface->printTop(this->location_data->getMap());
+    interface->printBot({
+        player->show(),
+        selection(i++) + " Inventory (coming soon)",
+        selection(i++) + " Settings (coming soon)",
+        selection(i++) + " Quit"
+    });
 }
 
 void LocationManager::attemptEncounter(){

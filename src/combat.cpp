@@ -70,35 +70,11 @@ void Combat::escape(){
 
 void Combat::show(){
     int i = 0;
-    interface->print({
-        "",
-        " ========= Combat ============================================================================== ",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "                                          1. Enemy",
-        "",
-        "",
-        "",
-        "",
-        "",
-        " =============================================================================================== ",
-        "",
-        "",
-        "    " + player->getName(),
-        "    HP: " + std::to_string(player->getCurrentHealth()) + "/" + std::to_string(player->getHealth()),
-        "    SP: ",
-        "    MP: ",
-        "",
-        "",
-        "    " + selection(i++) + " Attack (20 dmg)",
-        "    " + selection(i++) + " Heal (+50 hp)",
-        "    " + selection(i++) + " Run (exit battle)",
-        "",
-        "",
-        " =============================================================================================== ",
-        "",
+    interface->printTop({"1. Enemy"});
+    interface->printBot({
+        player->show(),
+        selection(i++) + " Attack (20 dmg)",
+        selection(i++) + " Heal (+50 hp)",
+        selection(i++) + " Run (exit battle)"
     });
 }

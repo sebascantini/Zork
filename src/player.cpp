@@ -17,6 +17,10 @@ void Player::turn(Context* context){
     context->playerTurn();
 }
 
+std::string Player::show(){
+    return " " + this->getName() + "    HP: " + std::to_string(this->getCurrentHealth()) + "/" + std::to_string(this->getMaxHealth());
+}
+
 void initializePlayer(){
     player = new Player();
 }

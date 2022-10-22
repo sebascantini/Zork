@@ -6,6 +6,7 @@
 class Player: public Character{
     public:
         Player();
+        std::string show();
         void turn(Context* context) override;
     private:
         void setName();

@@ -20,7 +20,7 @@ const std::string Character::getName(){
     return this->name;
 }
 
-const int Character::getHealth(){
+const int Character::getMaxHealth(){
     return this->health;
 }
 

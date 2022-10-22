@@ -12,6 +12,7 @@ class MainMenu : public Context{
         void select() override;
         void show() override;
     private:
+        void printTitle();
         void newGame();
         void loadGame();
         void settings();

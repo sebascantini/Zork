@@ -9,15 +9,16 @@ MainMenu::MainMenu(){
 
 void MainMenu::next(){
     interface->getInput(this);
-    this->show();
 }
 
 void MainMenu::moveUp(){
     this->selector = std::max(this->selector - 1, 0);
+    this->show();
 }
 
 void MainMenu::moveDown(){
     this->selector = std::min(this->selector + 1, 3);
+    this->show();
 }
 
 void MainMenu::select(){
@@ -35,6 +36,7 @@ void MainMenu::select(){
             this->quit();
             break;
     }
+    this->show();
 }
 
 void MainMenu::newGame(){
@@ -58,38 +60,31 @@ void MainMenu::quit(){
 }
 
 void MainMenu::show(){
-    int i = 0;;
-    interface->print({
-        "",
-        " ========= Combat ============================================================================== ",
-        "",
-        "",
-        "             ==============     ==============     ==============     ||          //",
-        "                         //     ||          ||     ||          ||     ||         //",
-        "                        //      ||          ||     ||          ||     ||        //",
-        "                       //       ||          ||     ||          ||     ||       //",
-        "                      //        ||          ||     ||          ||     ||      //",
-        "                     //         ||          ||     ||          ||     ||     //",
-        "                    //          ||          ||     ||==========||     ||____//",
-        "                   //           ||          ||     ||    \\\\           ||----\\\\",
-        "                  //            ||          ||     ||     \\\\          ||     \\\\",
-        "                 //             ||          ||     ||      \\\\         ||      \\\\",
-        "                //              ||          ||     ||       \\\\        ||       \\\\",
-        "               //               ||          ||     ||        \\\\       ||        \\\\",
-        "              //                ||          ||     ||         \\\\      ||         \\\\",
-        "             ==============     ==============     ||          \\\\     ||          \\\\",
+    int i = 0;
+    interface->printTop({
+        "==============     ==============     ==============     ||          //",
+        "            //     ||          ||     ||          ||     ||         //",
+        "           //      ||          ||     ||          ||     ||        //",
+        "          //       ||          ||     ||          ||     ||       //",
+        "         //        ||          ||     ||          ||     ||      //",
+        "        //         ||          ||     ||          ||     ||     //",
+        "       //          ||          ||     ||==========||     ||____//",
+        "      //           ||          ||     ||    \\\\           ||----\\\\",
+        "     //            ||          ||     ||     \\\\          ||     \\\\",
+        "    //             ||          ||     ||      \\\\         ||      \\\\",
+        "   //              ||          ||     ||       \\\\        ||       \\\\",
+        "  //               ||          ||     ||        \\\\       ||        \\\\",
+        " //                ||          ||     ||         \\\\      ||         \\\\",
+        "==============     ==============     ||          \\\\     ||          \\\\",
         "",
         "",
-        "                            Licence not owned and name is not final",
-        "                                       pls don't sue uwu",
-        " =============================================================================================== ",
-        "",
-        "    " + selection(i++) + " New Game",
-        "    " + selection(i++) + " Continue (coming soon)",
-        "    " + selection(i++) + " Settings (coming soon)",
-        "    " + selection(i++) + " Quit",
-        "",
-        " =============================================================================================== ",
-        "",
+        "               Licence not owned and name is not final",
+        "                          pls don't sue uwu"
+    });
+    interface->printBot({
+        selection(i++) + " New Game",
+        selection(i++) + " Continue (coming soon)",
+        selection(i++) + " Settings (coming soon)",
+        selection(i++) + " Quit"
     });
 }

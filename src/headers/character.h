@@ -10,7 +10,7 @@ class Character{
         Character();
         ~Character();
         const std::string getName();
-        const int getHealth();
+        const int getMaxHealth();
         const int getSpeed();
         const int getCurrentHealth();
         const bool isAlive();

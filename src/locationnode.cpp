@@ -1,11 +1,7 @@
-#include "headers/locationNode.h"
+#include "headers/locationnode.h"
 
 LocationNode::LocationNode(std::string file_name){
     this->file_name = file_name;
-}
-
-LocationNode::~LocationNode(){
-    
 }
 
 std::string LocationNode::name(){

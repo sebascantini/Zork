@@ -1,5 +1,5 @@
 #include "headers/interface.h"
-#include "headers/mainMenu.h"
+#include "headers/mainmenu.h"
 
 void initialize(){
     initializeInterface();

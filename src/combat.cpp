@@ -65,7 +65,7 @@ void Combat::useItem(){
 }
 
 void Combat::escape(){
-    this->enemies = 0;
+    this->exit();
 }
 
 void Combat::show(){

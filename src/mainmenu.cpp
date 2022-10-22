@@ -1,6 +1,6 @@
 #include "headers/interface.h"
-#include "headers/locationManager.h"
-#include "headers/mainMenu.h"
+#include "headers/world.h"
+#include "headers/mainmenu.h"
 #include "headers/player.h"
 
 MainMenu::MainMenu(){
@@ -41,8 +41,8 @@ void MainMenu::select(){
 
 void MainMenu::newGame(){
     initializePlayer();
-    LocationManager location_manager;
-    location_manager.run();
+    World world;
+    world.run();
     deletePlayer();
     this->selector = 0; // reset menu this->selector
 }

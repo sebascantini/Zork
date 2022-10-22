@@ -1,6 +1,6 @@
 #include <filesystem>
 #include <fstream>
-#include "headers/fileSystem.h"
+#include "headers/filesystem.h"
 #include "headers/math.h"
 #include <sstream>
 
@@ -66,7 +66,7 @@ LocationNode* loadWorld(){
     return locations[0];
 }
 
-LocationPackage* loadLocation(std::string file_name){
+Location* loadLocation(std::string file_name){
     int limit;
     std::string location_name;
     std::vector<std::string> location_map;
@@ -93,6 +93,6 @@ LocationPackage* loadLocation(std::string file_name){
 
     location_file.close();
 
-    return new LocationPackage(location_name, location_map, location_contents, location_entrances);
+    return new Location(location_name, location_map, location_contents, location_entrances);
 }
 

@@ -1,39 +1,39 @@
-#include "headers/locationPackage.h"
+#include "headers/location.h"
 #include "headers/math.h"
 
 #define SUCCESS true;
 #define FAILURE false;
 
-LocationPackage::LocationPackage(std::string location_name, std::vector<std::string> location_map, std::unordered_map<int, int> location_contents, std::vector<std::pair<int, int>> location_entrances){
+Location::Location(std::string location_name, std::vector<std::string> location_map, std::unordered_map<int, int> location_contents, std::vector<std::pair<int, int>> location_entrances){
     this->name = location_name;
     this->map = location_map;
     this->contents = location_contents;
     this->entrances = location_entrances;
 }
 
-const std::string LocationPackage::getName(){
+const std::string Location::getName(){
     return this->name;
 }
 
-const std::vector<std::string> LocationPackage::getMap(){
+const std::vector<std::string> Location::getMap(){
     std::vector<std::string> map_copy = this->map;
     map_copy[player_position.first][player_position.second] = 'p';
     return map_copy;
 }
 
-int LocationPackage::getExitID(){
+int Location::getExitID(){
     return this->contents[hash(this->player_position.first, this->player_position.second)];
 }
 
-std::pair<int, int> LocationPackage::getEntranceFrom(int origin_id){
+std::pair<int, int> Location::getEntranceFrom(int origin_id){
     return this->entrances[origin_id];
 }
 
-bool LocationPackage::movePlayer(int shift_x, int shift_y){
+bool Location::movePlayer(int shift_x, int shift_y){
     return this->movePlayerTo(this->player_position.first + shift_x, this->player_position.second + shift_y);
 }
 
-bool LocationPackage::movePlayerTo(int new_player_position_x, int new_player_position_y){
+bool Location::movePlayerTo(int new_player_position_x, int new_player_position_y){
     if(new_player_position_x < 0 || new_player_position_x >= this->map.size() || new_player_position_y < 0 || new_player_position_y >= this->map[0].size())
         return FAILURE;
     if(this->map[new_player_position_x][new_player_position_y] != '#'){
@@ -43,7 +43,7 @@ bool LocationPackage::movePlayerTo(int new_player_position_x, int new_player_pos
     return FAILURE;
 }
 
-bool LocationPackage::playerIsOnExit(){
+bool Location::playerIsOnExit(){
     int player_position_hash = hash(this->player_position.first, this->player_position.second);
     return this->contents.find(player_position_hash) != this->contents.end();
 }

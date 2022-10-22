@@ -1,10 +1,10 @@
 #ifndef COMBAT_H
 #define COMBAT_H
 
-#include "context.h"
+#include "game.h"
 #include "scheduler.h"
 
-class Combat : public Context{
+class Combat : public Game{
     public:
         Combat(std::vector<Character*> &enemies);
         ~Combat();
@@ -14,9 +14,8 @@ class Combat : public Context{
         std::vector<Character*> characters;
         int enemies;
         void next() override;
-        void moveUp() override;
-        void moveDown() override;
         void select() override;
+        void movePlayer(int shift_x, int shift_y) override;
         void show() override;
         void attack();
         void useItem();

@@ -43,7 +43,6 @@ void Interface::getInput(Context* context){
     int input;
     do{
         input = getKey();
-        context->show();
     }while(settings.getInputCode(input) == -1);
     switch(settings.getInputCode(input)){
         case KEY_CODE_UP:
@@ -65,6 +64,7 @@ void Interface::getInput(Context* context){
             context->options();
             break;
     }
+    context->show();
 }
 
 void Interface::printTop(std::vector<std::string> screen){

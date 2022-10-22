@@ -22,7 +22,6 @@ World::~World(){
 
 void World::next(){
     interface->getInput(this);
-    this->show();
 }
 
 void World::changeLocation(int entrance_shift_x, int entrance_shift_y){
@@ -44,22 +43,6 @@ void World::changeLocation(int entrance_shift_x, int entrance_shift_y){
     }
 }
 
-void World::moveUp(){
-    this->movePlayer(-1, 0);
-}
-
-void World::moveDown(){
-    this->movePlayer(1, 0);
-}
-
-void World::moveLeft(){
-    this->movePlayer(0, -1);
-}
-
-void World::moveRight(){
-    this->movePlayer(0, 1);
-}
-
 void World::movePlayer(int shift_x, int shift_y){
     if(this->location->movePlayer(shift_x, shift_y)){
         if(this->location->playerIsOnExit())
@@ -69,7 +52,24 @@ void World::movePlayer(int shift_x, int shift_y){
     }
 }
 
-void World::options(){
+void World::select(){
+    switch(this->selector){
+        case 0:
+            this->inventory();
+            break;
+        case 1:
+            this->settings();
+            break;
+        case 2:
+            this->quit();
+            break;
+    }
+}
+void World::inventory(){}
+
+void World::settings(){}
+
+void World::quit(){
     this->exit();
 }
 

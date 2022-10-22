@@ -5,6 +5,9 @@
 bool selected;
 
 Combat::Combat(std::vector<Character*> &enemies){
+    this->selector = -1;
+    this->location = new Location("battlefield", {"...............", "...............", "...............", "...............", "..............."}, {}, {});
+    this->location->movePlayerTo(1, 1);
     this->enemies = enemies.size();
     this->characters = enemies;
     this->characters.push_back(player); // player in the back
@@ -24,20 +27,13 @@ void Combat::next(){
 }
 
 void Combat::playerTurn(){
-    this->selector = 0;
     selected = false;
-    while(!selected){
+    while(!selected)
         interface->getInput(this);
-        this->show();
-    }
 }
 
-void Combat::moveUp(){
-    this->selector = std::max(this->selector - 1, 0);
-}
-
-void Combat::moveDown(){
-    this->selector = std::min(this->selector + 1, 2);
+void Combat::movePlayer(int shift_x, int shift_y){
+    this->location->movePlayer(shift_x, shift_y);
 }
 
 void Combat::select(){
@@ -70,7 +66,7 @@ void Combat::escape(){
 
 void Combat::show(){
     int i = 0;
-    interface->printTop({"1. Enemy"});
+    interface->printTop(location->getMap());
     interface->printBot({
         player->show(),
         selection(i++) + " Attack (20 dmg)",

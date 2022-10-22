@@ -1,18 +1,15 @@
 #include "headers/interface.h"
 #include "headers/locationManager.h"
 #include "headers/mainMenu.h"
+#include "headers/player.h"
 
 MainMenu::MainMenu(){
     this->show();
 }
 
-bool MainMenu::isActive(){
-    return this->is_active;
-}
-
 void MainMenu::next(){
-    getInput(this);
-    show();
+    interface->getInput(this);
+    this->show();
 }
 
 void MainMenu::moveUp(){
@@ -35,13 +32,16 @@ void MainMenu::select(){
             this->settings();
             break;
         case 3:
-            this->exit();
+            this->quit();
             break;
     }
 }
 
 void MainMenu::newGame(){
-    runContext(new LocationManager());
+    initializePlayer();
+    LocationManager location_manager;
+    location_manager.run();
+    deletePlayer();
     this->selector = 0; // reset menu this->selector
 }
 
@@ -53,17 +53,13 @@ void MainMenu::settings(){
     // coming soon
 }
 
-
-void MainMenu::exit(){
-    this->is_active = false;
-}
-
-std::string MainMenu::selection(int item){
-    return (this->selector == item) ? "->" : "";
+void MainMenu::quit(){
+    this->exit();
 }
 
 void MainMenu::show(){
-    print({
+    int i = 0;;
+    interface->print({
         "",
         " ========= Combat ============================================================================== ",
         "",
@@ -88,10 +84,10 @@ void MainMenu::show(){
         "                                       pls don't sue uwu",
         " =============================================================================================== ",
         "",
-        "    " + selection(0) + " New Game",
-        "    " + selection(1) + " Continue (coming soon)",
-        "    " + selection(2) + " Settings (coming soon)",
-        "    " + selection(3) + " Quit",
+        "    " + selection(i++) + " New Game",
+        "    " + selection(i++) + " Continue (coming soon)",
+        "    " + selection(i++) + " Settings (coming soon)",
+        "    " + selection(i++) + " Quit",
         "",
         " =============================================================================================== ",
         "",

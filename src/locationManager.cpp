@@ -1,15 +1,13 @@
 #include "headers/combat.h"
+#include "headers/character.h"
 #include "headers/fileSystem.h"
 #include "headers/interface.h"
 #include "headers/locationManager.h"
-#include "headers/player.h"
 #include "headers/math.h"
-
-#include "headers/enemy.h" // to remove in further update
 
 
 LocationManager::LocationManager(){
-    initializePlayer(); // shouldn't be here
+    this->selector = -1;
     this->current_location = loadWorld();
     this->location_data = loadLocation(this->current_location->name());
     this->location_data->movePlayerTo(9, 1); // shouldn't be here
@@ -17,17 +15,12 @@ LocationManager::LocationManager(){
 }
 
 LocationManager::~LocationManager(){
-    deletePlayer(); // shouldn't be here
     delete(this->current_location);
     delete(this->location_data);
 }
 
-bool LocationManager::isActive(){
-    return this->is_active;
-}
-
 void LocationManager::next(){
-    getInput(this);
+    interface->getInput(this);
     this->show();
 }
 
@@ -76,10 +69,11 @@ void LocationManager::movePlayer(int shift_x, int shift_y){
 }
 
 void LocationManager::options(){
-    this->is_active = false;
+    this->exit();
 }
 
 void LocationManager::show(){
+    int i = 0;
     std::vector<std::string> screen{"",
         " ========= World =============================================================================== ",
         "",
@@ -89,11 +83,9 @@ void LocationManager::show(){
         " =============================================================================================== ",
         "",
         "",
-        "    w. Move Up",
-        "    s. Move Down",
-        "    a. Move Left",
-        "    d. Move Right",
-        "    esc. Quit"
+        "    " + selection(i++) + " Inventory",
+        "    " + selection(i++) + " Settings (coming soon)",
+        "    " + selection(i++) + " Quit",
         "",
         "",
         " =============================================================================================== ",
@@ -104,7 +96,7 @@ void LocationManager::show(){
     for(int i = 0; i < map_copy.size(); ++i) // insert map
         screen.insert(screen.begin() + i + 4, "       " + map_copy[i]);
     
-    print(screen);
+    interface->print(screen);
 }
 
 void LocationManager::attemptEncounter(){
@@ -113,6 +105,7 @@ void LocationManager::attemptEncounter(){
 }
 
 void LocationManager::triggerEncounter(){
-    std::vector<Character*> enemies = {new Enemy()};
-    runContext(new Combat(enemies));
+    std::vector<Character*> enemies = {new Character()};
+    Combat combat (enemies);
+    combat.run();
 }

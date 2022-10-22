@@ -12,11 +12,3 @@ int Settings::getInputCode(int key_code){
         return -1;
     return this->controls[key_code];
 }
-
-void initializeSettings(){
-    settings = new Settings;
-}
-
-void finalizeSettings(){
-    delete(settings);
-}

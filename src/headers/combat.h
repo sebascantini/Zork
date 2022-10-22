@@ -8,21 +8,19 @@ class Combat : public Context{
     public:
         Combat(std::vector<Character*> &enemies);
         ~Combat();
-        bool isActive() override;
-        void next() override;
-        void playerTurn();
-        void moveUp() override;
-        void moveDown() override;
-        void select() override;
-        void show() override;
+        void playerTurn() override;
     private:
         Scheduler* scheduler;
         std::vector<Character*> characters;
         int enemies;
+        void next() override;
+        void moveUp() override;
+        void moveDown() override;
+        void select() override;
+        void show() override;
         void attack();
         void useItem();
-        void run();
-        std::string selection(int item);
+        void escape();
 };
 
 #endif

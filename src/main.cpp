@@ -1,20 +1,18 @@
 #include "headers/interface.h"
 #include "headers/mainMenu.h"
-#include "headers/settings.h"
 
 void initialize(){
     initializeInterface();
-    initializeSettings();
 }
 
 void finalize(){
     finalizeInterface();
-    finalizeSettings();
 }
 
 int main(){
     initialize();
-    runContext(new MainMenu());
+    MainMenu main_menu;
+    main_menu.run();
     finalize();
     return 0;
 }

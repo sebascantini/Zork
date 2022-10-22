@@ -11,7 +11,6 @@ class LocationManager : public Context{
     public:
         LocationManager();
         ~LocationManager();
-        bool isActive() override;
         void next() override;
         void moveUp() override;
         void moveDown() override;
@@ -20,7 +19,6 @@ class LocationManager : public Context{
         void options() override;
         void show() override;
     private:
-        bool is_active = true;
         LocationNode* current_location;
         LocationPackage* location_data;
         void changeLocation(int entrance_shift_x, int entrance_shift_y);

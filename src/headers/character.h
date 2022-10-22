@@ -7,6 +7,7 @@
 
 class Character{
     public:
+        Character();
         ~Character();
         const std::string getName();
         const int getHealth();
@@ -15,7 +16,7 @@ class Character{
         const bool isAlive();
         void heal(const int amount);
         void attack(Character* target);
-        virtual void turn(Context* context) {};
+        virtual void turn(Context* context);
 
     protected:
         void getAttacked(const int damage);

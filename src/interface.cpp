@@ -4,26 +4,31 @@
 #include "headers/interface.h"
 #include "headers/settings.h"
 
-void initializeInterface(){
+#define SCREEN_HEIGHT 38
+#define SCREEN_WIDTH 99
+
+Interface* interface;
+
+Interface::Interface(){
     initscr();
     keypad(stdscr, TRUE);
 }
 
-void finalizeInterface(){
+Interface::~Interface(){
     endwin();
 }
 
-const int getKey(){
+const int Interface::getKey(){
     return (int) getch();
 }
 
-void getInput(Context* context){
+void Interface::getInput(Context* context){
     int input;
     do{
         input = getKey();
         context->show();
-    }while(settings->getInputCode(input) == -1);
-    switch(settings->getInputCode(input)){
+    }while(settings.getInputCode(input) == -1);
+    switch(settings.getInputCode(input)){
         case KEY_CODE_UP:
             context->moveUp();
             break;
@@ -45,14 +50,22 @@ void getInput(Context* context){
     }
 }
 
-void printLine(std::string s){
+void Interface::printLine(std::string s){
     wprintw(stdscr, (s+'\n').c_str());
 }
 
-void print(std::vector<std::string> screen){
+void Interface::print(std::vector<std::string> screen){
     clear();
 
     for(int i = 0; i < screen.size(); ++i)
-        printLine(screen[i]);
+        this->printLine(screen[i]);
     std::cout << std::endl;
+}
+
+void initializeInterface(){
+    interface = new Interface();
+}
+
+void finalizeInterface(){
+    delete(interface);
 }

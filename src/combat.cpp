@@ -1,7 +1,6 @@
 #include "headers/combat.h"
 #include "headers/interface.h"
 #include "headers/player.h"
-#include "headers/settings.h"
 
 bool selected;
 
@@ -17,32 +16,19 @@ Combat::~Combat(){
     delete(this->scheduler);
 }
 
-bool Combat::isActive(){
-    return (player->isAlive() && this->enemies > 0);
-}
-
 void Combat::next(){
     this->characters[this->scheduler->next()]->turn(this);
     this->show();
+    if(!(player->isAlive() && this->enemies > 0))
+        this->exit();
 }
 
 void Combat::playerTurn(){
     this->selector = 0;
     selected = false;
     while(!selected){
-        getInput(this);
+        interface->getInput(this);
         this->show();
-    }
-    switch(this->selector){
-        case 0:
-            this->attack();
-            break;
-        case 1:
-            this->useItem();
-            break;
-        case 2:
-            this->run();
-            break;
     }
 }
 
@@ -56,6 +42,17 @@ void Combat::moveDown(){
 
 void Combat::select(){
     selected = true;
+    switch(this->selector){
+        case 0:
+            this->attack();
+            break;
+        case 1:
+            this->useItem();
+            break;
+        case 2:
+            this->escape();
+            break;
+    }
 }
 
 void Combat::attack(){
@@ -67,16 +64,13 @@ void Combat::useItem(){
     player->heal(50);
 }
 
-void Combat::run(){
+void Combat::escape(){
     this->enemies = 0;
 }
 
-std::string Combat::selection(int item){
-    return (this->selector == item) ? "->" : "";
-}
-
 void Combat::show(){
-    print({
+    int i = 0;
+    interface->print({
         "",
         " ========= Combat ============================================================================== ",
         "",
@@ -99,9 +93,9 @@ void Combat::show(){
         "    MP: ",
         "",
         "",
-        "    " + selection(0) + " Attack (20 dmg)",
-        "    " + selection(1) + " Heal (+50 hp)",
-        "    " + selection(2) + " Run (exit battle)",
+        "    " + selection(i++) + " Attack (20 dmg)",
+        "    " + selection(i++) + " Heal (+50 hp)",
+        "    " + selection(i++) + " Run (exit battle)",
         "",
         "",
         " =============================================================================================== ",

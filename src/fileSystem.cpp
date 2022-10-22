@@ -25,9 +25,11 @@ std::ifstream loadOptions(std::string file_name){
 std::unordered_map<int, int> loadControls(){
     std::ifstream file = loadOptions("controls");
     std::unordered_map<int, int> controls;
-    int key_code, key_id;
-    while(file >> key_code >> key_id)
-        controls[key_id] = key_code;
+    int key_code, key_id = 0;
+    while(file >> key_code){
+        controls[key_code] = key_id;
+        key_id++;
+    }
     return controls;
 }
 

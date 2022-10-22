@@ -16,12 +16,13 @@ void finalizeSettings();
 
 extern Settings* settings;
 
-//input key codes
-#define KEY_CODE_UP 1
-#define KEY_CODE_DOWN 2
-#define KEY_CODE_LEFT 3
-#define KEY_CODE_RIGHT 4
-#define KEY_CODE_SELECT 5
-#define KEY_CODE_OPTIONS 6
+enum KEY_CODES {
+    KEY_CODE_UP, 
+    KEY_CODE_DOWN, 
+    KEY_CODE_LEFT, 
+    KEY_CODE_RIGHT, 
+    KEY_CODE_SELECT, 
+    KEY_CODE_OPTIONS
+};
 
 #endif

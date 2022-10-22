@@ -1,5 +1,16 @@
 #include <algorithm>
 #include "headers/character.h"
+#include "headers/player.h"
+
+Character::Character(){
+   this->name = "Character";
+    this->health = 100;
+    this->defence = 20;
+    this->strength = 25;
+    this->speed = 50;
+    this->current_health = this->health;
+    this->weapon = new Weapon();
+}
 
 Character::~Character(){
     delete(this->weapon);
@@ -44,4 +55,8 @@ const int Character::outputDamage(){
 
 const int Character::inputDamage(const int damage){
     return std::max(0, (int)(damage-this->defence));
+}
+
+void Character::turn(Context* context){
+   this->attack(player);
 }

@@ -8,6 +8,7 @@ class Player: public Character{
         Player();
         std::string show();
         void turn(Context* context) override;
+        char symbol() override {return 'p';}
     private:
         void setName();
 };

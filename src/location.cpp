@@ -29,7 +29,7 @@ const std::vector<std::string> Location::getMap(){
     std::vector<std::string> map_copy = this->map;
     for(int i = 0; i < (*this->characters).size(); ++i){
         std::pair<int, int> character_position = this->character_positions[(*this->characters)[i]];
-        map_copy[character_position.first][character_position.second] = 'p';
+        map_copy[character_position.first][character_position.second] = (*this->characters)[i]->symbol();
     }
     return map_copy;
 }

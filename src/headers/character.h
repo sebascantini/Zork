@@ -17,6 +17,7 @@ class Character{
         void heal(const int amount);
         void attack(Character* target);
         virtual void turn(Context* context);
+        virtual char symbol() {return 'c';}
 
     protected:
         void getAttacked(const int damage);

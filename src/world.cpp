@@ -11,7 +11,7 @@ World::World(){
     this->selector = -1;
     this->current_location = loadWorld();
     this->location = loadLocation(this->current_location->name());
-    this->location->movePlayerTo(9, 1); // shouldn't be here
+    this->location->movePlayerTo(std::make_pair(9, 1)); // shouldn't be here
     this->show();
 }
 
@@ -38,7 +38,7 @@ void World::changeLocation(int entrance_shift_x, int entrance_shift_y){
     for(int i = 0; i < nearby_locations.size(); ++i){
         if(nearby_locations[i] == previous_location){
             std::pair<int, int> entrance_position = this->location->getEntranceFrom(i);
-            this->location->movePlayerTo(entrance_position.first + entrance_shift_x, entrance_position.second + entrance_shift_y);
+            this->location->movePlayerTo(std::make_pair(entrance_position.first + entrance_shift_x, entrance_position.second + entrance_shift_y));
         }
     }
 }

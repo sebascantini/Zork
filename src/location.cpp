@@ -1,5 +1,7 @@
 #include "headers/location.h"
+#include "headers/interface.h"
 #include "headers/math.h"
+#include "headers/player.h"
 
 #define SUCCESS true;
 #define FAILURE false;
@@ -9,6 +11,14 @@ Location::Location(std::string location_name, std::vector<std::string> location_
     this->map = location_map;
     this->contents = location_contents;
     this->entrances = location_entrances;
+    this->characters = new std::vector<Character *>(0);
+    this->characters->push_back(player);
+}
+
+Location::~Location(){
+    for(int i = 0; i < (*this->characters).size()-1; ++i)
+        delete((*this->characters)[i]);
+        delete(this->characters);
 }
 
 const std::string Location::getName(){
@@ -17,12 +27,15 @@ const std::string Location::getName(){
 
 const std::vector<std::string> Location::getMap(){
     std::vector<std::string> map_copy = this->map;
-    map_copy[player_position.first][player_position.second] = 'p';
+    for(int i = 0; i < (*this->characters).size(); ++i){
+        std::pair<int, int> character_position = this->character_positions[(*this->characters)[i]];
+        map_copy[character_position.first][character_position.second] = 'p';
+    }
     return map_copy;
 }
 
 int Location::getExitID(){
-    return this->contents[hash(this->player_position.first, this->player_position.second)];
+    return this->contents[hash(this->character_positions[player].first, this->character_positions[player].second)];
 }
 
 std::pair<int, int> Location::getEntranceFrom(int origin_id){
@@ -30,20 +43,30 @@ std::pair<int, int> Location::getEntranceFrom(int origin_id){
 }
 
 bool Location::movePlayer(int shift_x, int shift_y){
-    return this->movePlayerTo(this->player_position.first + shift_x, this->player_position.second + shift_y);
+    return this->movePlayerTo(std::make_pair(this->character_positions[player].first + shift_x, this->character_positions[player].second + shift_y));
 }
 
-bool Location::movePlayerTo(int new_player_position_x, int new_player_position_y){
-    if(new_player_position_x < 0 || new_player_position_x >= this->map.size() || new_player_position_y < 0 || new_player_position_y >= this->map[0].size())
+bool Location::movePlayerTo(std::pair<int, int> new_player_position){
+    if(!this->isPositionInRangeAndEmpty(new_player_position))
         return FAILURE;
-    if(this->map[new_player_position_x][new_player_position_y] != '#'){
-        player_position = std::make_pair(new_player_position_x, new_player_position_y);
+    if(this->map[new_player_position.first][new_player_position.second] != '#'){
+        this->character_positions[player] = std::make_pair(new_player_position.first, new_player_position.second);
         return SUCCESS;
     }
     return FAILURE;
 }
 
+bool Location::isPositionInRangeAndEmpty(std::pair<int, int> position){
+    if(position.first < 0 || position.first >= this->map.size() || position.second < 0 || position.second >= this->map[0].size()) // if not in range
+        return false;
+    
+    bool isEmpty = this->map[position.first][position.second] != '#';
+    for(int i = 0; i < this->characters->size()-1; ++i)
+        isEmpty &= this->character_positions[(*this->characters)[i]] != position;
+    return isEmpty;
+}
+
 bool Location::playerIsOnExit(){
-    int player_position_hash = hash(this->player_position.first, this->player_position.second);
+    int player_position_hash = hash(this->character_positions[player].first, this->character_positions[player].second);
     return this->contents.find(player_position_hash) != this->contents.end();
 }

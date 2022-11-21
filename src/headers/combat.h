@@ -12,7 +12,6 @@ class Combat : public Game{
     private:
         Scheduler* scheduler;
         std::vector<Character*> characters;
-        int enemies;
         void next() override;
         void select() override;
         void movePlayer(int shift_x, int shift_y) override;

@@ -1,3 +1,4 @@
+#include "headers/battlefield.h"
 #include "headers/combat.h"
 #include "headers/interface.h"
 #include "headers/player.h"
@@ -6,11 +7,9 @@ bool selected;
 
 Combat::Combat(std::vector<Character*> &enemies){
     this->selector = -1;
-    this->location = new Location("battlefield", {"...............", "...............", "...............", "...............", "..............."}, {}, {});
-    this->location->movePlayerTo(1, 1);
-    this->enemies = enemies.size();
     this->characters = enemies;
     this->characters.push_back(player); // player in the back
+    this->location = new Battlefield(this->characters);
     this->scheduler = new Scheduler(this->characters);
     this->show();
 }       
@@ -22,7 +21,7 @@ Combat::~Combat(){
 void Combat::next(){
     this->characters[this->scheduler->next()]->turn(this);
     this->show();
-    if(!(player->isAlive() && this->enemies > 0))
+    if(!(player->isAlive() && this->characters.size() > 1))
         this->exit();
 }
 
@@ -52,8 +51,12 @@ void Combat::select(){
 }
 
 void Combat::attack(){
-    player->attack(this->characters[0]);
-    this->enemies -= !(this->characters[0]->isAlive()); // if enemy is dead -1 enemies
+    int enemy = 0;
+    player->attack(this->characters[enemy]);
+    if(!this->characters[enemy]->isAlive()){ // kill player
+        delete(characters[enemy]);
+        characters.erase(characters.begin() + enemy);
+    }
 }
 
 void Combat::useItem(){

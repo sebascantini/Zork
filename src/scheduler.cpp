@@ -16,18 +16,16 @@ int Scheduler::next(){
     float fastest_time = __INT_MAX__;
 
     for(int i = 0; i < this->scheduling_table.size(); ++i){ //get character w
-        if((*this->characters_ptr)[i]->getCurrentHealth() > 0){ // if character is alive
-            if(this->scheduling_table[i][SCHEDULE_TABLE_PROGRESS] >= 100){ // if there was a tie, in previous function call, a character might already be  at 100.
-                this->scheduling_table[i][SCHEDULE_TABLE_PROGRESS] = SCHEDULE_TABLE_PROGRESS_INIT;
-                return i;
-            }
+        if(this->scheduling_table[i][SCHEDULE_TABLE_PROGRESS] >= 100){ // if there was a tie, in previous function call, a character might already be  at 100.
+            this->scheduling_table[i][SCHEDULE_TABLE_PROGRESS] = SCHEDULE_TABLE_PROGRESS_INIT;
+            return i;
+        }
 
-            int current_time = (SCHEDULE_TABLE_PROGRESS_MAX - this->scheduling_table[i][SCHEDULE_TABLE_PROGRESS])/this->scheduling_table[i][SCHEDULE_TABLE_SPEED]; // time that would take current character to reach max progress
+        int current_time = (SCHEDULE_TABLE_PROGRESS_MAX - this->scheduling_table[i][SCHEDULE_TABLE_PROGRESS])/this->scheduling_table[i][SCHEDULE_TABLE_SPEED]; // time that would take current character to reach max progress
 
-            if(current_time <= fastest_time){ // <= so that in returns the last fastest person (in case of a tie with the player, player has advantage)
-                fastest_time = current_time;
-                next_index = i;
-            }
+        if(current_time <= fastest_time){ // <= so that in returns the last fastest person (in case of a tie with the player, player has advantage)
+            fastest_time = current_time;
+            next_index = i;
         }
     }
 

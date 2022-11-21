@@ -92,7 +92,6 @@ Location* loadLocation(std::string file_name){
     }
 
     location_file.close();
-
     return new Location(location_name, location_map, location_contents, location_entrances);
 }
 

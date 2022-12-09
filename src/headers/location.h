@@ -9,7 +9,7 @@
 class Location{
     public:
         Location(){}
-        Location(std::string location_name, std::vector<std::string> location_map, std::unordered_map<int, int> location_contents, std::vector<std::pair<int, int>> location_entrances);
+        Location(std::string location_name, std::vector<std::string> location_map, std::unordered_map<int, Object*> location_contents);
         ~Location();
         const std::string getName();
         const std::vector<std::string> getMap();
@@ -21,9 +21,8 @@ class Location{
     protected:
         std::string name;
         std::vector<std::string> map;
-        std::vector<Character*> *characters;
-        std::unordered_map<int, int> contents;
-        std::vector<std::pair<int, int>> entrances;
+        std::vector<Character*> characters;
+        std::unordered_map<int, Object*> contents;
         std::unordered_map<Character*,std::pair<int, int>> character_positions;
         bool isPositionInRangeAndEmpty(std::pair<int, int> position);
 };

@@ -4,7 +4,13 @@
 #include <bsd/stdlib.h>
 
 int hash(int x, int y){
-    return pow(2, x) * (2 * y + 1);
+    return pow(2, x) * ((2 * y) + 1);
+}
+
+std::pair<int, int> unhash(int i){
+    int x = log2(i & (~(i - 1)));
+    int y = ((i / pow(2, x)) -1) / 2;
+    return std::make_pair(x, y);
 }
 
 bool tryEvent(double probability){

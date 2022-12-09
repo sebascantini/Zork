@@ -1,4 +1,3 @@
-#include "headers/combat.h"
 #include "headers/character.h"
 #include "headers/filesystem.h"
 #include "headers/interface.h"
@@ -25,6 +24,7 @@ void World::next(){
 }
 
 void World::changeLocation(int entrance_shift_x, int entrance_shift_y){
+
     //update location
     LocationNode* previous_location = this->current_location;
     this->current_location = previous_location->getNearbyLocations()[this->location->getExitID()];
@@ -44,12 +44,9 @@ void World::changeLocation(int entrance_shift_x, int entrance_shift_y){
 }
 
 void World::movePlayer(int shift_x, int shift_y){
-    if(this->location->movePlayer(shift_x, shift_y)){
+    if(this->location->movePlayer(shift_x, shift_y))
         if(this->location->playerIsOnExit())
             this->changeLocation(shift_x, shift_y);
-        else
-            this->attemptEncounter();
-    }
 }
 
 void World::select(){
@@ -82,15 +79,4 @@ void World::show(){
         selection(i++) + " Settings (coming soon)",
         selection(i++) + " Quit"
     });
-}
-
-void World::attemptEncounter(){
-    if(tryEvent(0.05))
-        triggerEncounter();
-}
-
-void World::triggerEncounter(){
-    std::vector<Character*> enemies = {new Character()};
-    Combat combat (enemies);
-    combat.run();
 }

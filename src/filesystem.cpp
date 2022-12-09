@@ -2,6 +2,7 @@
 #include <fstream>
 #include "headers/filesystem.h"
 #include "headers/math.h"
+#include "headers/access.h"
 #include <sstream>
 
 #define SETTINGS_FOLDER "settings/"
@@ -70,7 +71,7 @@ Location* loadLocation(std::string file_name){
     int limit;
     std::string location_name;
     std::vector<std::string> location_map;
-    std::unordered_map<int, int> location_contents;
+    std::unordered_map<int, Object*> location_contents;
     std::vector<std::pair<int, int>> location_entrances;
 
     std::ifstream location_file (MAP_FOLDER + file_name + MAP_FILE_EXTENTION);
@@ -84,14 +85,13 @@ Location* loadLocation(std::string file_name){
     }
     
     location_file >> limit;
+    int exit_x, exit_y;
     for(int i = 0; i < limit; ++i){
-        int exit_x, exit_y;
         location_file >> exit_x >> exit_y;
-        location_contents[hash(exit_x, exit_y)] = i;
-        location_entrances.push_back(std::make_pair(exit_x, exit_y));
+        location_contents[hash(exit_x, exit_y)] = new Access(i, std::make_pair(exit_x, exit_y));
     }
 
     location_file.close();
-    return new Location(location_name, location_map, location_contents, location_entrances);
+    return new Location(location_name, location_map, location_contents);
 }
 

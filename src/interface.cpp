@@ -22,7 +22,12 @@
 
 Interface* interface;
 
+void sigwinchHandler(int i){
+    interface->refreshScreen();
+}
+
 Interface::Interface(){
+    signal(SIGWINCH, sigwinchHandler);
     initscr();
     keypad(stdscr, TRUE);
     noecho();

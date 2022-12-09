@@ -7,10 +7,6 @@ class Player: public Character{
     public:
         Player();
         std::string show();
-        void turn(Context* context) override;
-        char symbol() override {return 'p';}
-    private:
-        void setName();
 };
 
 extern Player* player;

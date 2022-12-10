@@ -8,6 +8,10 @@ const char Object::get_symbol(){
     return this->symbol;
 }
 
+const int Object::get_id(){
+    return this->id;
+}
+
 bool Object::isAccess(){
     return false;
 }

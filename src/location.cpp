@@ -37,13 +37,13 @@ const std::vector<std::string> Location::getMap(){
 }
 
 int Location::getExitID(){
-    return this->contents[hash(this->character_positions[player].first, this->character_positions[player].second)]->get_index();
+    return this->contents[hash(this->character_positions[player].first, this->character_positions[player].second)]->get_id();
 }
 
 std::pair<int, int> Location::getEntranceFrom(int origin_id){
     std::pair<int, int> position = {-1, -1};
     for(auto& entry : contents)
-        if(entry.second->isAccess() && entry.second->get_index() == origin_id)
+        if(entry.second->isAccess() && entry.second->get_id() == origin_id)
             position = entry.second->get_exit();
     return position;
 }

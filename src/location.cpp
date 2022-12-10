@@ -78,3 +78,12 @@ bool Location::playerIsOnExit(){
         return contents[player_position_hash]->isAccess();
     return false;
 }
+
+void Location::interact(){
+    int player_position_hash = hash(this->character_positions[player].first, this->character_positions[player].second);
+    if(this->contents.find(player_position_hash) == this->contents.end())
+        return;
+    if(this->contents[player_position_hash]->isItem())
+        contents.erase(this->contents.find(player_position_hash));
+
+}

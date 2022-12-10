@@ -10,6 +10,7 @@ class Object{
         const int get_id();
         virtual std::pair<int, int> get_exit() {return {0, 0};};
         virtual bool isAccess();
+        virtual bool isItem();
     protected:
         std::string name;
         char symbol;

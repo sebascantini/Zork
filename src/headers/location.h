@@ -18,6 +18,7 @@ class Location{
         bool movePlayer(int shift_x, int shift_y);
         bool movePlayerTo(std::pair<int, int> new_player_position);
         bool playerIsOnExit();
+        void interact();
     protected:
         std::string name;
         std::vector<std::string> map;

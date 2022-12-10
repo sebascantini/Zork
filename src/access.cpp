@@ -1,8 +1,9 @@
 #include "headers/access.h"
+#include "headers/symbols.h"
 
 Access::Access(int index, std::pair<int, int> exit_position){
     this->name = "Access Point";
-    this->symbol = 'A';
+    this->symbol = ACCESS_SYMBOL;
     this->exit_position = exit_position;
     this->id = index;
 }

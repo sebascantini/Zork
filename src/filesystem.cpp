@@ -3,6 +3,7 @@
 #include "headers/filesystem.h"
 #include "headers/math.h"
 #include "headers/access.h"
+#include "headers/item.h"
 #include <sstream>
 
 #define SETTINGS_FOLDER "settings/"
@@ -68,7 +69,7 @@ LocationNode* loadWorld(){
 }
 
 Location* loadLocation(std::string file_name){
-    int limit;
+    int limit, pos_x, pos_y, id;
     std::string location_name;
     std::vector<std::string> location_map;
     std::unordered_map<int, Object*> location_contents;
@@ -76,6 +77,7 @@ Location* loadLocation(std::string file_name){
 
     std::ifstream location_file (MAP_FOLDER + file_name + MAP_FILE_EXTENTION);
 
+    //load map
     location_file >> location_name;
     location_file >> limit;
     for(int i = 0; i < limit; ++i){
@@ -83,12 +85,19 @@ Location* loadLocation(std::string file_name){
         location_file >> map_row;
         location_map.push_back(map_row);
     }
-    
+
+    // load location accesses
     location_file >> limit;
-    int exit_x, exit_y;
     for(int i = 0; i < limit; ++i){
-        location_file >> exit_x >> exit_y;
-        location_contents[hash(exit_x, exit_y)] = new Access(i, std::make_pair(exit_x, exit_y));
+        location_file >> pos_x >> pos_y;
+        location_contents[hash(pos_x, pos_y)] = new Access(i, std::make_pair(pos_x, pos_y));
+    }
+
+    //add items
+    location_file >> limit;
+    for(int i = 0; i < limit; ++i){
+        location_file >> id >> pos_x >> pos_y;
+        location_contents[hash(pos_x, pos_y)] = new Item(id);
     }
 
     location_file.close();

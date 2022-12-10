@@ -15,3 +15,7 @@ const int Object::get_id(){
 bool Object::isAccess(){
     return false;
 }
+
+bool Object::isItem(){
+    return false;
+}

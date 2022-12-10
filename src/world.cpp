@@ -51,6 +51,9 @@ void World::movePlayer(int shift_x, int shift_y){
 
 void World::select(){
     switch(this->selector){
+        case -1:
+            this->location->interact();
+            break;
         case 0:
             this->inventory();
             break;
@@ -62,6 +65,7 @@ void World::select(){
             break;
     }
 }
+
 void World::inventory(){}
 
 void World::settings(){}

@@ -1,6 +1,6 @@
 CC := g++
 CFLAGS := -Isrc/headers -lcurses `pkg-config --libs libbsd`
-NAME := dark
+NAME := run
 
 SRC := src
 HSRC := $(SRC)/headers

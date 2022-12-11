@@ -1,26 +1,28 @@
 #include <fstream>
-#include "headers/filesystem.h"
-#include "headers/math.h"
 #include "headers/access.h"
+#include "headers/filesystem.h"
 #include "headers/item.h"
+#include "headers/math.h"
+#include "headers/player.h"
+#include "headers/world.h"
 #include <sstream>
 
 #define MAP_FILE_EXTENTION ".location"
+#define DEFAULT_SAVE "save1"
 
 FileSystem* file_system;
 
-void FileSystem::setNewGameFiles(){
-    if(!fs::exists(this->saves))
-        fs::create_directory(this->saves);
-    this->current_save = this->saves / "save1";
-    if(fs::exists(this->current_save))
-        fs::remove_all(this->current_save);
-    fs::create_directory(this->current_save);
-    std::filesystem::copy(shared_folder, this->current_save, std::filesystem::copy_options::recursive);
+void FileSystem::newGame(){
+    this->createNewGameFiles();
+    this->loadGame();
 }
 
-void FileSystem::setSavePath(){
-    this->current_save = this->saves / "save1";
+void FileSystem::loadGame(){
+    this->current_save = this->saves / DEFAULT_SAVE;
+    initializePlayer();
+    World world (this->loadWorld());
+    world.run();
+    deletePlayer();
 }
 
 std::ifstream FileSystem::loadOptions(std::string file_name){
@@ -109,6 +111,16 @@ Location* FileSystem::loadLocation(std::string file_name){
 
     location_file.close();
     return new Location(location_name, location_map, location_contents);
+}
+
+void FileSystem::createNewGameFiles(){
+    if(!fs::exists(this->saves))
+        fs::create_directory(this->saves);
+    this->current_save = this->saves / "save1";
+    if(fs::exists(this->current_save))
+        fs::remove_all(this->current_save);
+    fs::create_directory(this->current_save);
+    std::filesystem::copy(shared_folder, this->current_save, std::filesystem::copy_options::recursive);
 }
 
 void initializeFileSystem(){

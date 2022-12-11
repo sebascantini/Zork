@@ -9,7 +9,7 @@
 
 class World : public Game{
     public:
-        World();
+        World(LocationNode* current_location);
         ~World();
         void next() override;
         void select() override;

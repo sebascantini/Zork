@@ -1,8 +1,6 @@
 #include "headers/filesystem.h"
 #include "headers/interface.h"
-#include "headers/world.h"
 #include "headers/mainmenu.h"
-#include "headers/player.h"
 
 MainMenu::MainMenu(){
     this->show();
@@ -25,10 +23,10 @@ void MainMenu::moveDown(){
 void MainMenu::select(){
     switch(this->selector){
         case 0:
-            this->newGame();
+            file_system->newGame();
             break;
         case 1:
-            this->loadGame();
+            file_system->loadGame();
             break;
         case 2:
             this->settings();
@@ -39,22 +37,6 @@ void MainMenu::select(){
     }
     this->selector = 0; // reset menu this->selector
     this->show();
-}
-
-void MainMenu::newGame(){
-    file_system->setNewGameFiles();
-    initializePlayer();
-    World world;
-    world.run();
-    deletePlayer();
-}
-
-void MainMenu::loadGame(){
-    file_system->setSavePath();
-    initializePlayer();
-    World world;
-    world.run();
-    deletePlayer();
 }
 
 void MainMenu::settings(){
@@ -88,9 +70,9 @@ void MainMenu::show(){
         "                          pls don't sue uwu"
     });
     interface->printBot({
-        selection(i++) + " New Game",
-        selection(i++) + " Continue",
-        selection(i++) + " Settings (coming soon)",
-        selection(i++) + " Quit"
+        this->selection(i++) + " New Game",
+        this->selection(i++) + " Continue",
+        this->selection(i++) + " Settings (coming soon)",
+        this->selection(i++) + " Quit"
     });
 }

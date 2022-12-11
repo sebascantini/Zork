@@ -6,9 +6,9 @@
 #include "headers/player.h"
 
 
-World::World(){
+World::World(LocationNode* current_location){
     this->selector = -1;
-    this->current_location = file_system->loadWorld();
+    this->current_location = current_location;
     this->location = file_system->loadLocation(this->current_location->name());
     this->location->movePlayerTo(std::make_pair(9, 1)); // shouldn't be here
     this->show();

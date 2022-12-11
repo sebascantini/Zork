@@ -10,8 +10,8 @@ namespace fs = std::filesystem;
 
 class FileSystem{
     public:
-        void setNewGameFiles();
-        void setSavePath();
+        void newGame();
+        void loadGame();
         std::unordered_map<int, int> loadControls();
         LocationNode* loadWorld();
         Location* loadLocation(std::string file_name);
@@ -24,6 +24,7 @@ class FileSystem{
         const fs::path map_folder {"maps"};
         const fs::path world_file {map_folder / "connectivity.world"};
         std::ifstream loadOptions(std::string file_name);
+        void createNewGameFiles();
 };
 
 extern FileSystem* file_system;

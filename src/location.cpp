@@ -10,13 +10,14 @@ Location::Location(std::string location_name, std::vector<std::string> location_
     this->name = location_name;
     this->map = location_map;
     this->contents = location_contents;
-    this->characters = std::vector<Character *>(0);
     this->characters.push_back(player);
 }
 
 Location::~Location(){
     for(int i = 0; i < this->characters.size()-1; ++i)
         delete(this->characters[i]);
+    for(auto& entry : contents)
+        delete(entry.second);
 }
 
 const std::string Location::getName(){

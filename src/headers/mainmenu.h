@@ -13,8 +13,6 @@ class MainMenu : public Context{
         void show() override;
     private:
         void printTitle();
-        void newGame();
-        void loadGame();
         void settings();
         void quit();
 };

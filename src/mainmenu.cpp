@@ -50,7 +50,11 @@ void MainMenu::newGame(){
 }
 
 void MainMenu::loadGame(){
-    // coming soon
+    file_system->setSavePath();
+    initializePlayer();
+    World world;
+    world.run();
+    deletePlayer();
 }
 
 void MainMenu::settings(){
@@ -85,7 +89,7 @@ void MainMenu::show(){
     });
     interface->printBot({
         selection(i++) + " New Game",
-        selection(i++) + " Continue (coming soon)",
+        selection(i++) + " Continue",
         selection(i++) + " Settings (coming soon)",
         selection(i++) + " Quit"
     });

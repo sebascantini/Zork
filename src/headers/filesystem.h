@@ -11,6 +11,7 @@ namespace fs = std::filesystem;
 class FileSystem{
     public:
         void setNewGameFiles();
+        void setSavePath();
         std::unordered_map<int, int> loadControls();
         LocationNode* loadWorld();
         Location* loadLocation(std::string file_name);

@@ -19,6 +19,10 @@ void FileSystem::setNewGameFiles(){
     std::filesystem::copy(shared_folder, this->current_save, std::filesystem::copy_options::recursive);
 }
 
+void FileSystem::setSavePath(){
+    this->current_save = this->saves / "save1";
+}
+
 std::ifstream FileSystem::loadOptions(std::string file_name){
     std::ifstream file (this->settings_folder / file_name);
     if(!file.is_open()){

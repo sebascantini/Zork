@@ -1,12 +1,21 @@
-#include "src/headers/math.h"
+#include <filesystem>
 #include <iostream>
 
+namespace fs = std::filesystem;
+
+
+fs::path saves;
+fs::path shared_folder {"shared"};
+
 int main(){
-    int num1, num2;
-    std::cin >> num1 >> num2;
-    int hashed = hash(num1, num2);
-    std::cout << hashed << std::endl;
-    std::pair<int, int> output = unhash(hashed);
-    std::cout << output.first << "       " << output.second << std::endl;
+    saves = "saves";
+    if(!fs::exists(saves))
+        fs::create_directory(saves);
+    saves = saves / "save1";
+    if(fs::exists(saves))
+        fs::remove_all(saves);
+    fs::create_directory(saves);
+    std::filesystem::copy(shared_folder, saves, std::filesystem::copy_options::recursive);
+
     return 0;
 }

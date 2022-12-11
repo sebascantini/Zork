@@ -8,8 +8,8 @@
 
 World::World(){
     this->selector = -1;
-    this->current_location = loadWorld();
-    this->location = loadLocation(this->current_location->name());
+    this->current_location = file_system->loadWorld();
+    this->location = file_system->loadLocation(this->current_location->name());
     this->location->movePlayerTo(std::make_pair(9, 1)); // shouldn't be here
     this->show();
 }
@@ -31,7 +31,7 @@ void World::changeLocation(int entrance_shift_x, int entrance_shift_y){
     
     //load location data
     delete(this->location);
-    this->location = loadLocation(this->current_location->name());
+    this->location = file_system->loadLocation(this->current_location->name());
 
     //place player at entrance
     std::vector<LocationNode*> nearby_locations = current_location->getNearbyLocations();

@@ -1,4 +1,3 @@
-#include <filesystem>
 #include <fstream>
 #include "headers/filesystem.h"
 #include "headers/math.h"
@@ -6,26 +5,31 @@
 #include "headers/item.h"
 #include <sstream>
 
-#define SETTINGS_FOLDER "settings/"
-#define SETTINGS_DEFAULT_FOLDER "settings/default/"
-
-#define MAP_FOLDER "shared/maps/"
 #define MAP_FILE_EXTENTION ".location"
-#define WORLD_FILE "shared/maps/connectivity.world"
 
-namespace fs = std::filesystem;
+FileSystem* file_system;
 
-std::ifstream loadOptions(std::string file_name){
-    std::ifstream file (SETTINGS_FOLDER + file_name);
+void FileSystem::setNewGameFiles(){
+    if(!fs::exists(this->saves))
+        fs::create_directory(this->saves);
+    this->current_save = this->saves / "save1";
+    if(fs::exists(this->current_save))
+        fs::remove_all(this->current_save);
+    fs::create_directory(this->current_save);
+    std::filesystem::copy(shared_folder, this->current_save, std::filesystem::copy_options::recursive);
+}
+
+std::ifstream FileSystem::loadOptions(std::string file_name){
+    std::ifstream file (this->settings_folder / file_name);
     if(!file.is_open()){
-        fs::copy(SETTINGS_DEFAULT_FOLDER + file_name, SETTINGS_FOLDER + file_name);
-        file.open(SETTINGS_FOLDER + file_name);
+        fs::copy(this->settings_default_folder / file_name, this->settings_folder / file_name);
+        file.open(this->settings_folder / file_name);
     }
     return file;
 }
 
-std::unordered_map<int, int> loadControls(){
-    std::ifstream file = loadOptions("controls");
+std::unordered_map<int, int> FileSystem::loadControls(){
+    std::ifstream file = this->loadOptions("controls");
     std::unordered_map<int, int> controls;
     int key_code, key_id = 0;
     while(file >> key_code){
@@ -35,8 +39,8 @@ std::unordered_map<int, int> loadControls(){
     return controls;
 }
 
-LocationNode* loadWorld(){
-    std::ifstream connectivity_file (WORLD_FILE);
+LocationNode* FileSystem::loadWorld(){
+    std::ifstream connectivity_file (this->current_save / this->world_file);
     
     std::string temporary_file_line;
     std::vector<std::istringstream*> location_streams;
@@ -68,14 +72,13 @@ LocationNode* loadWorld(){
     return locations[0];
 }
 
-Location* loadLocation(std::string file_name){
+Location* FileSystem::loadLocation(std::string file_name){
     int limit, pos_x, pos_y, id;
     std::string location_name;
     std::vector<std::string> location_map;
     std::unordered_map<int, Object*> location_contents;
-    std::vector<std::pair<int, int>> location_entrances;
 
-    std::ifstream location_file (MAP_FOLDER + file_name + MAP_FILE_EXTENTION);
+    std::ifstream location_file (this->current_save / this->map_folder / (file_name + MAP_FILE_EXTENTION));
 
     //load map
     location_file >> location_name;
@@ -104,3 +107,10 @@ Location* loadLocation(std::string file_name){
     return new Location(location_name, location_map, location_contents);
 }
 
+void initializeFileSystem(){
+    file_system = new FileSystem();
+}
+
+void finalizeFileSystem(){
+    delete(file_system);
+}

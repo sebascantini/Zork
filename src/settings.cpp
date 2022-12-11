@@ -4,7 +4,7 @@
 Settings* settings;
 
 Settings::Settings(){
-    this->controls = loadControls();
+    this->controls = file_system->loadControls();
 }
 
 int Settings::getInputCode(int key_code){

@@ -1,3 +1,4 @@
+#include "headers/filesystem.h"
 #include "headers/interface.h"
 #include "headers/world.h"
 #include "headers/mainmenu.h"
@@ -36,15 +37,16 @@ void MainMenu::select(){
             this->quit();
             break;
     }
+    this->selector = 0; // reset menu this->selector
     this->show();
 }
 
 void MainMenu::newGame(){
+    file_system->setNewGameFiles();
     initializePlayer();
     World world;
     world.run();
     deletePlayer();
-    this->selector = 0; // reset menu this->selector
 }
 
 void MainMenu::loadGame(){

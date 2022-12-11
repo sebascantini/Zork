@@ -1,11 +1,14 @@
+#include "headers/filesystem.h"
 #include "headers/interface.h"
 #include "headers/mainmenu.h"
 
 void initialize(){
+    initializeFileSystem();
     initializeInterface();
 }
 
 void finalize(){
+    finalizeFileSystem();
     finalizeInterface();
 }
 

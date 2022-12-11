@@ -1,4 +1,4 @@
-# Dark
+# Zork(Name to change)
 
 A project where I make an open-world turn-based game playable from the terminal.
 

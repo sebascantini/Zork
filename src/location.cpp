@@ -34,6 +34,9 @@ void Location::load(std::string file_name){
     //load location name
     file >> this->name;
 
+    //load player
+    this->characters.push_back(player);
+
     //load map
     file >> limit;
     for(int i = 0; i < limit; ++i){
@@ -41,22 +44,32 @@ void Location::load(std::string file_name){
         file >> map_row;
         this->map.push_back(map_row);
     }
+
+    if(file.eof()){
+        file.close();
+        return;
+    }
+
     // load location accesses
     file >> limit;
     for(int i = 0; i < limit; ++i){
         file >> pos_x >> pos_y;
         this->contents[hash(pos_x, pos_y)] = new Access(i, std::make_pair(pos_x, pos_y));
     }
+
+    if(file.eof()){
+        file.close();
+        return;
+    }
+
     //add items
     file >> limit;
     for(int i = 0; i < limit; ++i){
         file >> id >> pos_x >> pos_y;
         this->contents[hash(pos_x, pos_y)] = new Item(id);
     }
+    
     file.close();
-
-    //load player
-    this->characters.push_back(player);
 }
 
 const std::string Location::getName(){
@@ -65,10 +78,12 @@ const std::string Location::getName(){
 
 const std::vector<std::string> Location::getMap(){
     std::vector<std::string> map_copy = this->map;
+    //print contents
     for(auto& entry : contents){
         std::pair<int, int> position = unhash(entry.first);
         map_copy[position.first][position.second] = entry.second->get_symbol();
     }
+    //print characters
     for(int i = 0; i < this->characters.size(); ++i){
         std::pair<int, int> character_position = this->character_positions[this->characters[i]];
         map_copy[character_position.first][character_position.second] = this->characters[i]->get_symbol();
@@ -116,7 +131,7 @@ bool Location::playerIsOnExit(){
     int player_position_hash = hash(this->character_positions[player].first, this->character_positions[player].second);
     if(this->contents.find(player_position_hash) != this->contents.end())
         return contents[player_position_hash]->isAccess();
-    return false;
+    return FAILURE;
 }
 
 void Location::interact(){

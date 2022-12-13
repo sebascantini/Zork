@@ -1,15 +1,18 @@
 #include "headers/filesystem.h"
 #include "headers/interface.h"
 #include "headers/mainmenu.h"
+#include "headers/settings.h"
 
 void initialize(){
     initializeFileSystem();
     initializeInterface();
+    initializeSettings();
 }
 
 void finalize(){
     finalizeFileSystem();
     finalizeInterface();
+    finalizeSettings();
 }
 
 int main(){

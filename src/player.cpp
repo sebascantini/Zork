@@ -17,6 +17,6 @@ void initializePlayer(){
     player = new Player();
 }
 
-void deletePlayer(){
+void finalizePlayer(){
     delete(player);
 }

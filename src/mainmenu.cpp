@@ -2,6 +2,10 @@
 #include "headers/interface.h"
 #include "headers/mainmenu.h"
 
+#include "headers/config.h"
+
+fs::path save_path;
+
 MainMenu::MainMenu(){
     this->show();
 }
@@ -23,28 +27,24 @@ void MainMenu::moveDown(){
 void MainMenu::select(){
     switch(this->selector){
         case 0:
+            save_path = save_folder / "save1";
             file_system->newGame();
             break;
         case 1:
+            save_path = save_folder / "save1";
             file_system->loadGame();
             break;
         case 2:
             this->settings();
             break;
         case 3:
-            this->quit();
+            this->exit();
             break;
     }
-    this->selector = 0; // reset menu this->selector
-    this->show();
 }
 
 void MainMenu::settings(){
     // coming soon
-}
-
-void MainMenu::quit(){
-    this->exit();
 }
 
 void MainMenu::show(){

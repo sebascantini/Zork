@@ -9,6 +9,7 @@ class Settings{
         int getInputCode(int key_code);
     private:
         std::unordered_map<int, int> controls;
+        void loadControls();
 };
 
 void initializeSettings();

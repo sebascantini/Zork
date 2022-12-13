@@ -14,7 +14,6 @@ class MainMenu : public Context{
     private:
         void printTitle();
         void settings();
-        void quit();
 };
  
 #endif

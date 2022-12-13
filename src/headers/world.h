@@ -11,6 +11,7 @@ class World : public Game{
     public:
         World(LocationNode* current_location);
         ~World();
+        void load();
         void next() override;
         void select() override;
         void show() override;
@@ -20,7 +21,6 @@ class World : public Game{
         void movePlayer(int shift_x, int shift_y) override ;
         void inventory();
         void settings();
-        void quit();
         void attemptEncounter();
         void triggerEncounter();
 };

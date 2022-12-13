@@ -1,5 +1,4 @@
 #include "headers/character.h"
-#include "headers/filesystem.h"
 #include "headers/interface.h"
 #include "headers/world.h"
 #include "headers/math.h"
@@ -7,16 +6,17 @@
 
 
 World::World(LocationNode* current_location){
+    initializePlayer();
     this->selector = -1;
     this->current_location = current_location;
-    this->location = file_system->loadLocation(this->current_location->name());
-    this->location->movePlayerTo(std::make_pair(9, 1)); // shouldn't be here
+    this->location = new Location(this->current_location->name(), std::make_pair(9, 1));
     this->show();
 }
 
 World::~World(){
     delete(this->current_location);
     delete(this->location);
+    finalizePlayer();
 }
 
 void World::next(){
@@ -31,7 +31,7 @@ void World::changeLocation(int entrance_shift_x, int entrance_shift_y){
     
     //load location data
     delete(this->location);
-    this->location = file_system->loadLocation(this->current_location->name());
+    this->location = new Location(this->current_location->name());
 
     //place player at entrance
     std::vector<LocationNode*> nearby_locations = current_location->getNearbyLocations();
@@ -61,7 +61,7 @@ void World::select(){
             this->settings();
             break;
         case 2:
-            this->quit();
+            this->exit();
             break;
     }
 }
@@ -69,10 +69,6 @@ void World::select(){
 void World::inventory(){}
 
 void World::settings(){}
-
-void World::quit(){
-    this->exit();
-}
 
 void World::show(){
     int i = 0;

@@ -2,15 +2,21 @@
 #include "headers/interface.h"
 #include "headers/math.h"
 #include "headers/player.h"
+#include "headers/config.h"
+#include "headers/objects.h"
+#include <fstream>
 
 #define SUCCESS true;
 #define FAILURE false;
+#define MAP_FILE_EXTENTION ".location"
 
-Location::Location(std::string location_name, std::vector<std::string> location_map, std::unordered_map<int, Object*> location_contents){
-    this->name = location_name;
-    this->map = location_map;
-    this->contents = location_contents;
-    this->characters.push_back(player);
+Location::Location(std::string file_name){
+    this->load(file_name);
+}
+
+Location::Location(std::string file_name, std::pair<int, int> starting_player_position){
+    this->load(file_name);
+    this->movePlayerTo(starting_player_position);
 }
 
 Location::~Location(){
@@ -18,6 +24,39 @@ Location::~Location(){
         delete(this->characters[i]);
     for(auto& entry : contents)
         delete(entry.second);
+}
+
+void Location::load(std::string file_name){
+    int limit, pos_x, pos_y, id;
+
+    std::ifstream file (save_path / map_folder / (file_name + MAP_FILE_EXTENTION));
+
+    //load location name
+    file >> this->name;
+
+    //load map
+    file >> limit;
+    for(int i = 0; i < limit; ++i){
+        std::string map_row;
+        file >> map_row;
+        this->map.push_back(map_row);
+    }
+    // load location accesses
+    file >> limit;
+    for(int i = 0; i < limit; ++i){
+        file >> pos_x >> pos_y;
+        this->contents[hash(pos_x, pos_y)] = new Access(i, std::make_pair(pos_x, pos_y));
+    }
+    //add items
+    file >> limit;
+    for(int i = 0; i < limit; ++i){
+        file >> id >> pos_x >> pos_y;
+        this->contents[hash(pos_x, pos_y)] = new Item(id);
+    }
+    file.close();
+
+    //load player
+    this->characters.push_back(player);
 }
 
 const std::string Location::getName(){

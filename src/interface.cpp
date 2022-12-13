@@ -53,8 +53,8 @@ void Interface::getInput(Context* context){
     int input;
     do{
         input = getKey();
-    }while(settings.getInputCode(input) == -1);
-    switch(settings.getInputCode(input)){
+    }while(settings->getInputCode(input) == -1);
+    switch(settings->getInputCode(input)){
         case KEY_CODE_UP:
             context->moveUp();
             break;

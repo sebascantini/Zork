@@ -3,7 +3,6 @@
 
 #include <curses.h>
 #include "context.h"
-#include "settings.h"
 #include <string>
 #include <vector>
 
@@ -20,7 +19,6 @@ class Interface{
     private:
         WINDOW* window_top;
         WINDOW* window_bot;
-        Settings settings;
         void print(WINDOW* window, int position_y, int position_x, std::vector<std::string> screen);
         void refreshWindow(WINDOW* window);
 };

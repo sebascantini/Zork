@@ -1,14 +1,14 @@
+
 CC := g++
-CFLAGS := -Isrc/headers -lcurses `pkg-config --libs libbsd`
+CFLAGS := -lcurses 
 NAME := run
 
 SRC := src
-HSRC := $(SRC)/headers
 OBJ := bin
 
-SOURCES := $(wildcard $(SRC)/*.cpp)
-DEPS = $(wildcard $(HSRC)/*.h)
-OBJECTS := $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SOURCES))
+SOURCES := $(wildcard $(SRC)/*.cpp $(SRC)/*/*.cpp $(SRC)/*/*/*.cpp $(SRC)/*/*/*/*.cpp)
+DEPS = $(wildcard $(SRC)/*.h $(SRC)/*/*.h $(SRC)/*/*/*.h $(SRC)/*/*/*/*.h)
+OBJECTS := $(patsubst notdir %.cpp,$(OBJ)/%.o,$(SOURCES))
 
 $(OBJ)/%.o: $(SRC)/%.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

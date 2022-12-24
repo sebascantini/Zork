@@ -45,38 +45,6 @@ Interface::~Interface(){
     endwin();
 }
 
-const int Interface::getKey(){
-    return (int) getch();
-}
-
-void Interface::getInput(Context* context){
-    int input;
-    do{
-        input = getKey();
-    }while(settings->getInputCode(input) == -1);
-    switch(settings->getInputCode(input)){
-        case KEY_CODE_UP:
-            context->moveUp();
-            break;
-        case KEY_CODE_DOWN:
-            context->moveDown();
-            break;
-        case KEY_CODE_LEFT:
-            context->moveLeft();
-            break;
-        case KEY_CODE_RIGHT:
-            context->moveRight();
-            break;
-        case KEY_CODE_SELECT:
-            context->select();
-            break;
-        case KEY_CODE_OPTIONS:
-            context->options();
-            break;
-    }
-    context->show();
-}
-
 void Interface::log(std::string msg){
     WINDOW* log_window = newwin(HEIGHT_WINDOW_SETTINGS, WIDTH_WINDOW_SETTINGS, POSITION_WINDOW_SETTINGS_Y, POSITION_WINDOW_SETTINGS_X);
     int window_width, window_height;

@@ -21,7 +21,7 @@ Location::Location(std::string file_name, std::pair<int, int> starting_player_po
 Location::~Location(){
     for(int i = 0; i < this->characters.size()-1; ++i)
         delete(this->characters[i]);
-    for(auto& entry : contents)
+    for(auto& entry : this->contents)
         delete(entry.second);
 }
 
@@ -78,7 +78,7 @@ const std::string Location::getName(){
 const std::vector<std::string> Location::getMap(){
     std::vector<std::string> map_copy = this->map;
     //print contents
-    for(auto& entry : contents){
+    for(auto& entry : this->contents){
         std::pair<int, int> position = unhash(entry.first);
         map_copy[position.first][position.second] = entry.second->getSymbol();
     }
@@ -121,7 +121,7 @@ int Location::getExitID(){
 
 std::pair<int, int> Location::getEntranceFrom(int origin_id){
     std::pair<int, int> position = {-1, -1};
-    for(auto& entry : contents)
+    for(auto& entry : this->contents)
         if(entry.second->isAccess() && entry.second->getID() == origin_id)
             position = entry.second->getExit();
     return position;

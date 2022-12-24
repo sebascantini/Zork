@@ -14,7 +14,6 @@ void GameManager::newGame(){
 void GameManager::loadGame(){
     save_path = save_folder / "save1";
     Game game;
-    game.run();
 }
 
 void GameManager::createNewGameFiles(){

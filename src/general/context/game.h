@@ -12,20 +12,19 @@ class Game : public Context{
         Game();
         ~Game();
         void load();
-        void next() override;
         void moveUp() override;
         void moveDown() override;
         void moveLeft() override;
         void moveRight() override;
         void options() override;
         void select() override;
-        void show() override;
     private:
         bool moving = true;
         Location* location;
         LocationNode* current_location; //graph
-        void inventory();
+        void show() override;
         void settings();
+        void inventory();
         void changeLocation();
         void loadWorld();
 };

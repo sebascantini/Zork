@@ -7,16 +7,13 @@
 class MainMenu : public Context{
     public:
         MainMenu();
-        void next() override;
         void moveUp() override;
         void moveDown() override;
         void select() override;
-        void show() override;
     private:
-        void printTitle();
-        void settings();
         GameManager game_manager;
-
+        void printTitle();
+        void show() override;
 };
  
 #endif

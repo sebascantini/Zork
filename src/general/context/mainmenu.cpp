@@ -1,14 +1,12 @@
 #include "../interface.h"
 #include "mainmenu.h"
 #include "../settings/paths.h"
+#include "../settings/settings.h"
 
 MainMenu::MainMenu(){
-    this->selector = MenuSelector(0, 4);
+    this->selector = MenuSelector(0, 3);
     this->show();
-}
-
-void MainMenu::next(){
-    interface->getInput(this);
+    this->run();
 }
 
 void MainMenu::moveUp(){
@@ -30,16 +28,12 @@ void MainMenu::select(){
             this->game_manager.loadGame();
             break;
         case 2:
-            this->settings();
+            settings->open();
             break;
         case 3:
             this->exit();
             break;
     }
-}
-
-void MainMenu::settings(){
-    // coming soon
 }
 
 void MainMenu::show(){

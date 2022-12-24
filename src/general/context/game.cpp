@@ -13,16 +13,13 @@ Game::Game(){
     this->selector = MenuSelector(-1, 2);
     this->location = new Location(this->current_location->name(), std::make_pair(9, 1));
     this->show();
+    this->run();
 }
 
 Game::~Game(){
     delete(this->current_location);
     delete(this->location);
     finalizePlayer();
-}
-
-void Game::next(){
-    interface->getInput(this);
 }
 
 void Game::moveUp(){

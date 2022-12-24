@@ -2,14 +2,21 @@
 #define SETTINGS_H
 
 #include <unordered_map>
+#include "../context/context.h"
 
-class Settings{
+class Settings : public Context{
     public:
         Settings();
+        void moveUp() override;
+        void moveDown() override;
+        void options() override;
+        void select() override;
+        void open();
         int getInputCode(int key_code);
     private:
         std::unordered_map<int, int> controls;
         void loadControls();
+        void show() {};
 };
 
 void initializeSettings();

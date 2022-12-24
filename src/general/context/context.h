@@ -6,23 +6,21 @@
 
 class Context{
     public:
-        void run();
-        virtual void next(){}
         virtual void moveUp() {}
         virtual void moveDown() {}
         virtual void moveLeft() {}
         virtual void moveRight() {}
         virtual void select() {}
         virtual void options() {}
-        virtual void playerTurn(){}
-        virtual void show() {}
     protected:
         MenuSelector selector;
+        void run();
+        const int getKey();
+        void getInput();
         void exit();
+        virtual void show() {}
     private:
-        bool is_active = true;
+        bool is_active;
 };
-
-void runContext(Context* context);
 
 #endif

@@ -1,13 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "context.h"
+#include "maincontext.h"
 #include "../../entity/characters/character.h"
 #include "../../world/locationnode.h"
 #include "../../world/location.h"
 #include <vector>
 
-class Game : public Context{
+class Game : public MainContext{
     public:
         Game();
         ~Game();

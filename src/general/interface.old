@@ -1,0 +1,10 @@
+// void Interface::refreshScreen(){
+//     this->refreshWindow(stdscr);
+//     this->refreshWindow(this->window_top);
+//     this->refreshWindow(this->window_bot);
+// }
+
+// void Interface::refreshWindow(WINDOW* window){
+//     touchwin(window);
+//     wrefresh(window);
+// }

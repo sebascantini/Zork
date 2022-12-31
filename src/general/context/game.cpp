@@ -1,13 +1,13 @@
-#include "../interface.h"
-#include "game.h"
-#include "../math.h"
-#include "../../entity/characters/player.h"
-#include "../settings/paths.h"
 #include <fstream>
 #include <sstream>
+#include "game.h"
+#include "../math.h"
+#include "../settings/paths.h"
+#include "../../entity/characters/player.h"
 
 
 Game::Game(){
+    this->setWindows();
     initializePlayer();
     this->loadWorld();
     this->selector = MenuSelector(-1, 2);
@@ -83,8 +83,8 @@ void Game::settings(){}
 
 void Game::show(){
     int i = 0;
-    interface->printTop(this->location->getMap());
-    interface->printBot({
+    this->printTop(this->location->getMap());
+    this->printBot({
         player->show(),
         this->selector.show(i++) + " Inventory (coming soon)",
         this->selector.show(i++) + " Settings (coming soon)",
@@ -112,6 +112,8 @@ void Game::changeLocation(){
             this->location->movePlayerTo(std::make_pair(entrance_position.first, entrance_position.second));
         }
     }
+    werase(this->window_top);
+    this->setBorders(this->window_top);
 }
 
 void Game::loadWorld(){

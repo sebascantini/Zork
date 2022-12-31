@@ -1,14 +1,17 @@
-#include "interface.h"
 #include "context/mainmenu.h"
 #include "settings/settings.h"
 
 void initialize(){
-    initializeInterface();
+    initscr();
+    keypad(stdscr, TRUE);
+    noecho();
+    curs_set(0);
+    refresh();
     initializeSettings();
 }
 
 void finalize(){
-    finalizeInterface();
+    endwin();
     finalizeSettings();
 }
 

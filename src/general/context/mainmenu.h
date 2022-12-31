@@ -1,10 +1,10 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
-#include "context.h"
+#include "maincontext.h"
 #include "../gamemanager.h"
 
-class MainMenu : public Context{
+class MainMenu : public MainContext{
     public:
         MainMenu();
         void moveUp() override;

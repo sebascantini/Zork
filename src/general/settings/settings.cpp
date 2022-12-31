@@ -2,7 +2,6 @@
 #include "paths.h"
 #include <fstream>
 #include <curses.h>
-#include "../interface.h"
 
 Settings* settings;
 

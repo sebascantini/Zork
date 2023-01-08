@@ -1,5 +1,5 @@
 #include "player.h"
-#include "../../settings/symbols.h"
+#include "../../config/symbols.h"
 
 Player* player;
 

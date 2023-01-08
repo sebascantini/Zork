@@ -1,5 +1,5 @@
 #include "item.h"
-#include "../../settings/symbols.h"
+#include "../../config/symbols.h"
 
 Item::Item(int id){
     this->id = id;

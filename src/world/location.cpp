@@ -1,7 +1,7 @@
 #include "location.h"
 #include "../other/math.h"
 #include "../entity/characters/player.h"
-#include "../settings/paths.h"
+#include "../config/paths.h"
 #include "../entity/entities.h"
 #include <fstream>
 

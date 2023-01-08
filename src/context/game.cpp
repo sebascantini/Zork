@@ -1,7 +1,7 @@
 #include <fstream>
 #include <sstream>
 #include "game.h"
-#include "../settings/paths.h"
+#include "../config/paths.h"
 #include "../entity/characters/player.h"
 
 

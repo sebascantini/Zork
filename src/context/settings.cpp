@@ -1,5 +1,5 @@
 #include "settings.h"
-#include "../settings/paths.h"
+#include "../config/paths.h"
 #include <fstream>
 #include <curses.h>
 

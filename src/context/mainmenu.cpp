@@ -1,5 +1,5 @@
 #include "mainmenu.h"
-#include "../settings/paths.h"
+#include "../config/paths.h"
 #include "settings.h"
 
 MainMenu::MainMenu(){

@@ -1,5 +1,5 @@
 #include "access.h"
-#include "../../general/settings/symbols.h"
+#include "../../settings/symbols.h"
 
 Access::Access(int index, std::pair<int, int> exit_position){
     this->id = index;

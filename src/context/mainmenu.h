@@ -2,7 +2,7 @@
 #define MAINMENU_H
 
 #include "maincontext.h"
-#include "../gamemanager.h"
+#include "../other/gamemanager.h"
 
 class MainMenu : public MainContext{
     public:

@@ -1,5 +1,5 @@
 #include "context.h"
-#include "../settings/settings.h"
+#include "settings.h"
 #include <bits/stdc++.h>
 
 void Context::run(){

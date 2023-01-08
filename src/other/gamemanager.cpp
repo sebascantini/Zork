@@ -1,6 +1,6 @@
 #include "gamemanager.h"
-#include "context/game.h"
-#include "settings/paths.h"
+#include "../context/game.h"
+#include "../settings/paths.h"
 #include <filesystem>
 
 fs::path save_path;

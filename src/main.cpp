@@ -1,5 +1,5 @@
 #include "context/mainmenu.h"
-#include "settings/settings.h"
+#include "context/settings.h"
 
 void initialize(){
     initscr();

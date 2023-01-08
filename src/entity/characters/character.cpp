@@ -1,5 +1,5 @@
 #include "character.h"
-#include "../../general/settings/symbols.h"
+#include "../../settings/symbols.h"
 
 char Character::getSymbol(){
     return CHARACTER_SYMBOL;

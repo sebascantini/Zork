@@ -1,9 +1,8 @@
 #include <fstream>
 #include <sstream>
 #include "game.h"
-#include "../math.h"
 #include "../settings/paths.h"
-#include "../../entity/characters/player.h"
+#include "../entity/characters/player.h"
 
 
 Game::Game(){

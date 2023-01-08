@@ -2,9 +2,9 @@
 #define GAME_H
 
 #include "maincontext.h"
-#include "../../entity/characters/character.h"
-#include "../../world/locationnode.h"
-#include "../../world/location.h"
+#include "../entity/characters/character.h"
+#include "../world/locationnode.h"
+#include "../world/location.h"
 #include <vector>
 
 class Game : public MainContext{

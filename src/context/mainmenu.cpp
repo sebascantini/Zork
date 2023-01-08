@@ -1,6 +1,6 @@
 #include "mainmenu.h"
 #include "../settings/paths.h"
-#include "../settings/settings.h"
+#include "settings.h"
 
 MainMenu::MainMenu(){
     this->setWindows();

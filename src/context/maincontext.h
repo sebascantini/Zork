@@ -2,14 +2,16 @@
 #define MAINCONTEXT_H
 
 #include "context.h"
+#include "../other/window.h"
 
 class MainContext : public Context{
     protected:
+        MainContext(){}
         void setWindows();
         void printTop(std::vector<std::string> screen);
         void printBot(std::vector<std::string> screen);
-        WINDOW* window_top;
-        WINDOW* window_bot;
+        Window window_top;
+        Window window_bot;
 };
 
 #define MAIN_WINDOW_WIDTH 99

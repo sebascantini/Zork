@@ -3,8 +3,6 @@
 
 #include <string>
 #include "menuselector.h"
-#include <curses.h>
-#include <vector>
 
 class Context{
     public:
@@ -21,10 +19,6 @@ class Context{
         void getInput();
         void exit();
         virtual void show() {}
-        WINDOW* createWindowAt(int height, int width, int position_y, int position_x);
-        WINDOW* createCenteredWindow(int height, int width);
-        void setBorders(WINDOW* window);
-        void printOnWindow(WINDOW* window, std::vector<std::string> screen, int position_y, int position_x);
         void log(std::string log_message);
     private:
         bool is_active;

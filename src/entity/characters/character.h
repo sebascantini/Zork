@@ -8,6 +8,9 @@ class Character : public Entity {
         Character() {};
         char getSymbol() override;
         bool isCharacter() override;
+        void increaseHealth(int amount);
+    protected:
+        int health = 100;
 };
 
 #endif

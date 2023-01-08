@@ -27,6 +27,7 @@ Location::~Location(){
 
 void Location::load(std::string file_name){
     int limit, pos_x, pos_y, id;
+    ItemFactory item_factory;
 
     std::ifstream file (save_path / map_folder / (file_name + MAP_FILE_EXTENTION));
 
@@ -65,7 +66,7 @@ void Location::load(std::string file_name){
     file >> limit;
     for(int i = 0; i < limit; ++i){
         file >> id >> pos_x >> pos_y;
-        this->contents[hash(pos_x, pos_y)] = new Item(id);
+        this->contents[hash(pos_x, pos_y)] = item_factory.create(id);
     }
     
     file.close();

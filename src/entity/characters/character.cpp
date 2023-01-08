@@ -8,3 +8,7 @@ char Character::getSymbol(){
 bool Character::isCharacter(){
     return true;
 }
+
+void Character::increaseHealth(int amount){
+    this->health += amount;
+}

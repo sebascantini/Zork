@@ -111,8 +111,6 @@ void Game::changeLocation(){
             this->location->movePlayerTo(std::make_pair(entrance_position.first, entrance_position.second));
         }
     }
-    werase(this->window_top);
-    this->setBorders(this->window_top);
 }
 
 void Game::loadWorld(){

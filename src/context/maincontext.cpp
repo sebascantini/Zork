@@ -1,19 +1,23 @@
 #include "maincontext.h"
+#include <iostream>
 
 void MainContext::setWindows(){
     int window_height,  window_width;
     getmaxyx(stdscr, window_height, window_width);
+            
     int position_x = (window_width - MAIN_WINDOW_WIDTH)/2;
     int position_y = (window_height - MAIN_WINDOW_HEIGHT)/2;
-    this->window_top = this->createWindowAt(WINDOW_SEPARATOR - 1, MAIN_WINDOW_WIDTH, position_y, position_x);
-    this->window_bot = this->createWindowAt(MAIN_WINDOW_HEIGHT - WINDOW_SEPARATOR, MAIN_WINDOW_WIDTH, position_y + WINDOW_SEPARATOR, position_x);
-    wrefresh(window_top);
-    wrefresh(window_bot);
+
+    this->window_top = Window(WINDOW_SEPARATOR - 1, MAIN_WINDOW_WIDTH, position_y, position_x);
+    this->window_bot = Window(MAIN_WINDOW_HEIGHT - WINDOW_SEPARATOR, MAIN_WINDOW_WIDTH, position_y + WINDOW_SEPARATOR, position_x);
+
+    window_top.refresh();
+    window_bot.refresh();
 }
 
 void MainContext::printTop(std::vector<std::string> screen){
     int window_width, window_height, screen_width_max = 0;
-    getmaxyx(this->window_top, window_height, window_width);
+    window_top.getSize(window_width, window_height);
 
     for(int i = 0; i < screen.size(); ++i){
         if(screen[i].size() > screen_width_max)
@@ -23,12 +27,16 @@ void MainContext::printTop(std::vector<std::string> screen){
     int position_x = (window_width -  screen_width_max)/2;
     int position_y = (window_height - screen.size())/2;
 
-    this->printOnWindow(this->window_top, screen, position_y, position_x);
+    this->window_top.erase();
+    this->window_top.printOnWindow(screen, position_y, position_x);
 }
 
 void MainContext::printBot(std::vector<std::string> screen){
     int window_width, window_height;
-    getmaxyx(this->window_bot, window_height, window_width);
+    this->window_bot.getSize(window_width, window_height);
+
     int position_y = (window_height - screen.size())/2;
-    this->printOnWindow(this->window_bot, screen, position_y, 1);
+
+    this->window_bot.erase();
+    this->window_bot.printOnWindow(screen, position_y, 1);
 }

@@ -3,6 +3,7 @@
 #include "settings.h"
 
 MainMenu::MainMenu(){
+
     this->setWindows();
     this->selector = MenuSelector(0, 3);
     this->show();
